@@ -2,7 +2,7 @@
 <head>
 <title>学習用第２章</title>
 </head>
-<bady>
+<body>
 <script  type="text/javascript">
 var s ='foobar';
 document.write("Hello World!! <br>");
@@ -132,8 +132,105 @@ document.write('例:「isFinite(1)」でやるとtrueが返るはず:' + isFinit
 document.write('例:「isFinite(NaN)」でやるとfalseが返るはず:' + isFinite(NaN) + '<br>');
 document.write('例:「isFinite(Infinity)」でやるとfalseが返るはず:' + isFinite(Infinity) + '<br>');
 document.write('例:「isFinite(-Infinity)」でやるとfalseが返るはず:' + isFinite(-Infinity) + '<br>');
-
 document.write('<br>');
+
+
+document.write('ブーリアン型<br>');
+document.write('どの言語でも共通的ですが、このように使います<br>');
+document.write('var flag = trueと書く<br>');
+var flag = true;
+document.write('結果:' + flag + '<br>');
+document.write('型を確認「typeof flag」:' + typeof flag + '<br>');
+document.write('var flag = trueと書く<br>');
+var flag = false;
+document.write('結果:' + flag + '<br>');
+document.write('型を確認「typeof flag」:' + typeof flag + '<br>');
+document.write('型変換を行うとこうなる<br>');
+document.write('「flag.toString()」: ' + flag.toString() + '<br>');
+document.write('型を見る「typeof flag.toString()」: ' + typeof flag.toString() + '<br>');
+document.write('コンストラクタの呼び出しも「var tval = new Boolean(true)のようシて関数呼び出しで明示的な型変換を行う<br>');
+var tval = new Boolean(true);
+document.write('結果:' + tval + ' :タイプ: '+ typeof tval + '<br>');
+document.write('<br>');
+
+document.write('undefined型<br>');
+document.write('typeof undefinedとしてもundefinedと返ってくる: '+ typeof undefined + '<br>');
+document.write('undefined = \'abc\'とするとundefinedという名前のグローバル変数に値を入れるという意味合いになる<br>');
+undefined = 'abc';
+document.write('結果：' + undefined + '<br>');
+document.write('typeofの結果：' + typeof undefined + '<br>');
+document.write('宣言しただけの変数はundefinedになる<br>');
+var u;
+document.write('var uとする<br>');
+document.write('typeofの結果：'  + typeof u + '<br>');
+document.write('<br>');
+
+document.write('オブジェクト型について<br>');
+document.write('var obj = {};のように空のオブジェクトを作ります');
+var obj = {};
+document.write('typeofで見てみる：' + typeof obj + ' <br>');
+
+document.write('ブーリアン型への型変換<br>');
+
+document.write('このようにif文を書く「if(0) { document.write(\'T\'); } else { document.write(\'F\'); }」<br>');
+document.write('結果：');
+if(0) { document.write('T<br>'); } else { document.write('F<br>'); }
+document.write('<br>');
+document.write('!!を使った暗黙の型変換もイディオムとして定義されている<br>');
+document.write('例:<br>');
+document.write('!!1:' + !!1 + ' <br>');
+document.write('!!\'x\':' + !!'x' + ' <br>');
+document.write('!!\'t\':' + !!'t' + ' <br>');
+document.write('!!\'f\':' + !!'f' + ' <br>');
+document.write('!!\'\':' + !!'' + ' <br>');
+document.write('!!null:' + !!null + ' <br>');
+document.write('注意！：オブジェクト型のfalseで判定させるとならずtrueになってしまう<br>');
+document.write('var b = new Boolean(false);のように宣言する<br>');
+var b = new Boolean(false);
+document.write('このようにif文を書く「if(b) { document.write(\'T\'); } else { document.write(\'F\'); }」<br>');
+document.write('結果：');
+if(b) { document.write('T<br>'); } else { document.write('F<br>'); }
+document.write('<br>');
+
+document.write('var b = new Number(0);のように宣言する<br>');
+var b = new Number(0);
+document.write('このようにif文を書く「if(b) { document.write(\'T\'); } else { document.write(\'F\'); }」<br>');
+document.write('結果：');
+if(b) { document.write('T<br>'); } else { document.write('F<br>'); }
+document.write('<br>');
+
+document.write('var b = new String(\'\');のように宣言する<br>');
+var b = new String('');
+document.write('このようにif文を書く「if(b) { document.write(\'T\'); } else { document.write(\'F\'); }」<br>');
+document.write('結果：');
+if(b) { document.write('T<br>'); } else { document.write('F<br>'); }
+document.write('<br>');
+
+document.write('その為オブジェクト型以外で宣言する必要がある<br>');
+document.write('<br>');
+document.write('var b = Boolean(false);のように宣言する<br>');
+var b = Boolean(false);
+document.write('このようにif文を書く「if(b) { document.write(\'T\'); } else { document.write(\'F\'); }」<br>');
+document.write('結果：');
+if(b) { document.write('T<br>'); } else { document.write('F<br>'); }
+document.write('<br>');
+
+document.write('var b = Number(0);のように宣言する<br>');
+var b = Number(0);
+document.write('このようにif文を書く「if(b) { document.write(\'T\'); } else { document.write(\'F\'); }」<br>');
+document.write('結果：');
+if(b) { document.write('T<br>'); } else { document.write('F<br>'); }
+document.write('<br>');
+
+document.write('var b = String(\'\');のように宣言する<br>');
+var b = String('');
+document.write('このようにif文を書く「if(b) { document.write(\'T\'); } else { document.write(\'F\'); }」<br>');
+document.write('結果：');
+if(b) { document.write('T<br>'); } else { document.write('F<br>'); }
+document.write('<br>');
+
+
+
 
 
 
