@@ -89,6 +89,58 @@ document.write('数値をString型への変換<br>');
 var n1 =1;
 document.write('var n1 =1;のように数値型で宣言する<br>');
 document.write('n1.ToString();で変換する：' + n1.toString() + '<br>');
+document.write('<br>');
+
+
+document.write('ナンバー変数へのコンバート<br>');
+
+var n1 = Number(1);
+document.write('var n1 = Number(1);のように使用することが出来る<br>');
+document.write('出録結果:' + n1 + '<br>');
+document.write('var n1 = Number(\'x\');のようにすると数値型に変換できないため「NaN」返るはずです<br>');
+var n1 = Number('x');
+document.write('出録結果:' + n1 + '<br>');
+document.write('<br>');
+
+
+document.write('境界値とと数値<br>');
+document.write('Number.MAX_VALUE;によりNumberオブジェクトの最大値がわかる<br>');
+document.write(Number.MAX_VALUE + '<br>');
+document.write('Number.MIN_VALUE;によりNumberオブジェクトの最小値がわかる<br>');
+document.write(Number.MIN_VALUE + '<br>');
+document.write('負の数の最大値は-Number.MAX_VALUE;によりNumberオブジェクトの最大値がわかる<br>');
+document.write(-Number.MAX_VALUE + '<br>');
+document.write('負の数の最小値は-Number.MIN_VALUE;によりNumberオブジェクトの最小値がわかる<br>');
+document.write(-Number.MIN_VALUE + '<br>');
+document.write('Number.MAX_VALUE.toString(16);により16進数のNumberオブジェクトの最大値がわかる<br>');
+document.write(Number.MAX_VALUE.toString(16) + '<br>');
+document.write('無限大数については最大値、最小値をこのように書く<br>');
+document.write('正の無限大「Number.POSITIVE_INFINITY」:' + Number.POSITIVE_INFINITY + '<br>');
+document.write('負の無限大「Number.NEGATIVE_INFINITY」:' + Number.NEGATIVE_INFINITY + '<br>');
+document.write('NaN「Number.NaN」:' + Number.NaN + '<br>');
+document.write('正の無限大に2を割ってもInfinityになる「Number.POSITIVE_INFINITY / 2」:' + Number.POSITIVE_INFINITY  / 2+ '<br>');
+document.write('NaNに１を足してもNaNのまま「Number.NaN + 1」:' + (Number.NaN + 1) + '<br>');
+document.write('NaNに0でかけてももNaNのまま「Number.NaN * 0」:' + Number.NaN * 1 + '<br>');
+document.write('NaN - NaN = NaN 「Number.NaN  - NaN」:' + (Number.NaN - NaN) + '<br>');
+document.write('var nanobj = new Number(Nan);のようにオブジェクトを作成する<br>');
+var nanobj = new Number(NaN);
+document.write('isNaN(nanobj);にするとTrueが返るはず: ' + isNaN(nanobj) + '<br>');
+document.write('数値に型変換するとNaNになる「isNaN({})」<br>');
+document.write('結果:'+ isNaN({}) + '<br>');
+document.write('有限数判定をisNaNと同様のグローバル変数であるisFinite(1)のようにして判定することが出来る<br>');
+document.write('例:「isFinite(1)」でやるとtrueが返るはず:' + isFinite(1) + '<br>');
+document.write('例:「isFinite(NaN)」でやるとfalseが返るはず:' + isFinite(NaN) + '<br>');
+document.write('例:「isFinite(Infinity)」でやるとfalseが返るはず:' + isFinite(Infinity) + '<br>');
+document.write('例:「isFinite(-Infinity)」でやるとfalseが返るはず:' + isFinite(-Infinity) + '<br>');
+
+document.write('<br>');
+
+
+
+
+
+
+
 
 
 
