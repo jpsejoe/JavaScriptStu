@@ -229,6 +229,215 @@ document.write('結果：');
 if(b) { document.write('T<br>'); } else { document.write('F<br>'); }
 document.write('<br>');
 
+document.write('オブジェクト型からの型変換<br>');
+document.write('var obj = {}; 空のオブジェクト<br>');
+var obj = {}; //空のオブジェクト
+obj = ''; //文字型へ暗黙の文字変換（文字列連結演算子)
+document.write('obj = \'\'; 文字型へ暗黙の文字変換（文字列連結演算子).型を確認:' + ( typeof obj) + '<br>');
+document.write('現在の中身を確認：' + obj.toString() + '<br>');
+var obj = {}; //空のオブジェクト
+
+obj.toString = function() { return 'Myobj'; } //tostringメソッドの実数を書き換える
+document.write(obj.toString() + '1<br>');
+
+obj = ''; //文字列型へ暗黙変換
+document.write(String(obj) + '2<br>');  //文字列型へ暗黙変換
+document.write('<br>');
+
+document.write('変数宣言分<br>');
+document.write('var hoge,hoge2のように宣言することが可能です<br>');
+document.write('var hoge = \'abc\',hoge2 = \'def\'のように宣言することも可能です<br>');
+document.write('<br>');
+
+document.write('関数宣言文について<br>');
+document.write('冒頭でも出てきたが、関数宣言を行う場合にfunctionを用いる<br>');
+
+document.write('例：<br>');
+document.write('functon 関数名(引数,引数){<br>');
+document.write('   文<br>');
+document.write('   文<br>');
+document.write('}<br>');
+document.write('あえて引数を書いたが、引数はなくてもいい<br>');
+document.write('<br>');
+
+document.write('Swich文<br>');
+document.write('どの言語でもそうだがこのように書く<br>');
+
+document.write('var s = \'foo\'');
+
+document.write('switch(s) { <br>');
+document.write('	case 0: <br>');
+document.write('	     document.write(\'not here<br>\'); <br>');
+document.write('	     break; <br>');
+document.write('	case 1: <br>');
+document.write('	     document.write(\'not here<br>\'); <br>');
+document.write('	     break; <br>');
+document.write('	case s.length: <br>');
+document.write('	     document.write(\'not here<br>\'); <br>');
+document.write('	     break; <br>');
+document.write('	case \'f\' + \'o\' + \'o\': <br>');
+document.write('	     document.write(\'here<br>\'); <br>');
+document.write('	     break; <br>');
+document.write('	default: <br>');
+document.write('	     document.write(\'not here<br>\'); <br>');
+document.write('	     break; <br>');
+document.write('} <br>');
+
+var s = 'foo';
+
+switch(s) {
+	case 0:
+	     document.write('not here<br>');
+	     break;
+	case 1:
+	     document.write('not here<br>');
+	     break;
+	case s.length:
+	     document.write('not here<br>');
+	     break;
+	case 'f' + 'o' + 'o':
+	     document.write('here<br>');
+	     break;
+	default:
+	     document.write('not here<br>');
+	     break;
+}
+document.write('<br>');
+
+document.write('While文<br>');
+document.write('While文はこのように書きます<br>');
+document.write('基本的な文法は同じです<br>');
+document.write('var i =0;');
+document.write('while(i <5){');
+document.write('	document.write(\'出力結果：\' + i + \'<br>\');');
+document.write('	i++;');
+document.write('}');
+document.write('<br>実行結果<br>');
+var i =0;
+while(i <5){
+	document.write('出力結果：' + i + '<br>');
+	i++;
+}
+document.write('do-while文はこのように書きます<br>');
+document.write('do {<br>');
+document.write('	document.write(\'出力結果：\' + i + \');<br>');
+document.write('	i++;<br>');
+document.write('}while (i <5);<br>');
+
+document.write('<br>実行結果<br>');
+
+i = 0;
+do {
+	document.write('出力結果：' + i + '<br>');
+	i++;
+}while (i <5);
+
+document.write('for文のイディオム<br>');
+
+for(var i = 0;i <10 ;i++) {
+	document.write('実行結果：' + i + '<br>');
+}
+document.write('<br>');
+document.write('for in文<br>');
+
+document.write('inの左辺には代入先に使える式を書きます<br>');
+document.write('例:for(変数 in オブジェクト式)<br>');
+
+document.write('var obj = {x:1, y:3, z:2};<br>');
+document.write('for(var k in obj)<br>');
+document.write('{<br>');
+document.write('	document.write(\'結果：\' + k);<br>');
+document.write('}<br>');
+
+var obj = {x:1, y:3, z:2};
+for(var k in obj)
+{
+	document.write('結果：' + k + '<br>');
+}
+
+document.write('<br>');
+document.write('プロパティ値を表示させる<br>');
+document.write('<br>');
+document.write('var obj = {x:1, y:3, z:2};<br>');
+document.write('for(var k in obj)<br>');
+document.write('{<br>');
+document.write('	document.write(\'結果：\' + obj[k]);<br>');
+document.write('}<br>');
+
+var obj = {x:1, y:3, z:2};
+for(var k in obj)
+{
+	document.write('結果：' + obj[k] + '<br>');
+}
+
+//document.write('<br>');
+//document.write('for each in 文<br>');
+//document.write('for each in文ではECMAScriptには存在しないJava Script限定の独自拡張子です。<br>');
+//document.write('for each in 文は次の構文です。変数とオブジェクト式の説明はfor inと同じです。<br>');
+//document.write('<br>');
+//document.write('例：for each (変数 in オブジェクト式)<br>');
+//document.write('<br>');
+//
+//var obj = {x:1, y:3, z:2};
+//for each (var v in obj) {
+////	document.write('結果：' + v + '<br>');
+//}
+document.write('<br>');
+
+document.write('continue文<br>');
+document.write('書き方はこのようになる<br>');
+document.write(' for(var i = 0; i < 10; i++)');
+document.write(' {');
+document.write(' 	if( i % 2 !=0)');
+document.write(' 	{');
+document.write(' 		continue;');
+document.write(' 	}');
+document.write(' 	document.write(\'結果：\' + i);<br>');
+document.write(' }<br>');
+
+
+for(var i = 0; i < 10; i++)
+{
+	if( i % 2 !=0)
+	{
+		continue;
+	}
+	document.write('結果：' + i + '<br>');
+}
+document.write('<br>');
+document.write('例外について<br>');
+document.write('JavaScriptでは式を任意の型に使用できます。C#でいうException型などにする必要はありません<br>');
+document.write('例外を補足する側はtry-catch-finally構成を使います。cath節とfinally節の両方の省略はできません。片方だけの省略は可能です<br>');
+document.write('<br>');
+
+document.write(' try {<br>');
+document.write(' 文<br>');
+document.write(' } catch (変数名) {<br>');
+document.write(' 文<br>');
+document.write(' } finally {<br>');
+document.write(' 文<br>');
+document.write(' }<br>');
+
+document.write('例としてこのように書く：<br>');
+document.write('try {<br>');
+document.write('	document.write(\'1<br>\');<br>');
+document.write('	null.x;<br>');
+document.write('	document.write(\'not here<br>\');<br>');
+document.write('}catch (e) {<br>');
+document.write('	document.write(\'2<br>\');<br>');
+document.write('} finally {<br>');
+document.write('	document.write(\'3<br>\');<br>');
+document.write('}<br>');
+
+try {
+	document.write('1<br>');
+	null.x;
+	document.write('not here<br>');
+}catch (e) {
+	document.write('2<br>');
+} finally {
+	document.write('3<br>');
+}
 
 
 
