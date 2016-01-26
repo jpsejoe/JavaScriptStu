@@ -382,6 +382,7 @@ for(var k in obj)
 //for each (var v in obj) {
 ////	document.write('結果：' + v + '<br>');
 //}
+
 document.write('<br>');
 
 document.write('continue文<br>');
@@ -438,6 +439,84 @@ try {
 } finally {
 	document.write('3<br>');
 }
+document.write('<br>');
+
+document.write('演算子の優先順序と、結合規則<br>');
+document.write('計算される順番は、＊が先、＋が先などは同じである<br>');
+document.write('1+2+3のときは(1+2)+3として扱われる.:' + (1+2+3) +  '<br>');
+document.write('又このような書き家であれば代入演算子が右結合であることを意味している<br>');
+document.write('x = y = z = 0;はx = (y = (z =0))となる<br>');
+document.write('<br>');
+
+document.write('比較演算子<br>');
+document.write('オペランドの方が異なる場合は次の動作をする<br>');
+document.write('* 片方が数値、もう片方が数値に変換可能な場合、数値に型変換して数値の大小比較<br>');
+document.write('* オぺランドのどちらかがNaNであればfalse<br>');
+document.write('* 片方が文字列値、もう片方が文字列値に変換可能な場合、文字列に型変換して文字列値の大小を比較<br>');
+document.write('* オペランドのどちらが数値もしくは文字列値に変換できない、あるいはNaNに変換された場合、演算の結果はfalse<br>');
+
+document.write('<br>');
+document.write('オペランドの両方が文字列型であれば文字列として大小比較しますが、片方が文字列以外であれば数値への型変換をします。<br>');
+document.write('\'100\' > \'99\'の結果はこうなる：' + ('100' > '99' )+ '<br>');
+document.write('しかしこの要な場合はTRUEになる「\'100\' > 99」:' + ('100' > 99) + '<br>');
+document.write('nullとの比較もtrueとなってしまう<br>');
+document.write('true > 0の結果' + ( true > 0) + '<br>');
+document.write('null < 1の結果' + (null <1 ) + '<br>');
+document.write('null > 1の結果' + (null >1 ) + '<br>');
+
+document.write('<br>');
+
+document.write('void演算子<br>');
+document.write('voidは単項のundefined演算子です。<br>オペランドに何を渡しても演算結果はunderfined値になります。<br>');
+document.write('void 0としたとき：' + void 0 + '<br>');
+document.write('void \'x\'としたとき：' + void 'x' + '<br>');
+
+document.write('var x = 0;<br>');
+document.write('void x++;<br>');
+var x = 0;
+void x++;
+document.write('結果：' + (x) + '<br>');
+document.write('(x)のようにカッコで囲むのはよく行われる<br>');
+document.write('カンマ(,)演算時<br>');
+document.write('<br>');
+document.write('オブジェクトのプロパティと変数が似ている印象を抱くことがあると思います<br>');
+document.write('どちらもname（変数名やプロパティ名）を書くと値を得られます。<br>');
+document.write('どちらも代入式の左辺に書くと代入先になります。<br>');
+document.write('実は、JavaScriptの変数はプロパティそのものです。似ているのではなく両者は同じものである.<br>');
+document.write('　変数はスコープの違いで<b>グローバル変数とローカル変数</b>（パラメータ変数を含む）の2種類に分けられます。<br>');
+document.write('グローバル変数はトップレベルコードで宣言する変数です。<br>トップレベルコードとは関数の外に書いたコードです。ローカル変数は関数内で宣言する変数です<br>');
+document.write('グローバル変数とローカル変数の両者とも実態はプロパティです<br>');
+document.write('　グローバル変数（及びグローバル変数名）はグローバルオブジェクトのプロパティです。グローバルオブジェクトは実行時に最初から存在するオブジェクトです。<br>');
+
+document.write(' var x = \'foo\';<br>');
+document.write(' document.write(\'グローバル変数:\'+ this.x);<br>');
+document.write(' function fn() {}<br>');
+
+var x = 'foo';
+document.write('グローバル変数:'+ this.x + '<br>');
+function fn() {}
+document.write('\'fn\' in this;の結果：' + ('fn' in this) + '<br>');
+
+
+document.write('　トップレベルのコードのthis参照はグローバルオブジェクトを参照します。このため上記コードのthis.xはグローバルオブジェクトのプロパティｘを意味します<br>');
+document.write('そしてこれはグローバル変数ｘそのものです。<br>');
+document.write('　次のようにトップレベルコードでグローバル変数glovalにthis参照の値を代入すると、変数はグローバルオブジェクトのプロパティであると同時にグローバルオブジェクトの参照を持つ自己参照的な関係になります<br>');
+var global = this;
+document.write('\'global\' in this;の結果:' + ('global' in this) + '<br>');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
