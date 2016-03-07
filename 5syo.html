@@ -1,0 +1,102 @@
+<html>
+<head>
+<title>学習用第２章</title>
+</head>
+<body>
+<script  type="text/javascript">
+
+
+document.write('<br>');
+document.write('デフォルト値を模したイディオム');
+document.write('引数1-2-3<br>');
+var value = {x:1, y:2, z:3 };
+var value1 = getDistance(value);
+document.write('x:' + value1.x + 'y:' + value1.y + 'z:' + value1.z +  '<br>');
+
+function getDistance(pos){
+	pos = pos || { x:0, y:0, z:0 }; //引数posがなければデフォルト値を使う
+	return Math.sqrt(pos.x * pos.x + pos.y * pos.y + pos.z * pos.z);
+}
+
+document.write('<br>');
+document.write('コンストラクタとクラス定義');
+document.write('JavaやC++のようにクラスを定義する構文にある言語の経験者には前節で説明したJavaScriptのコンストラクタが奇妙に見えるかもしれません<br>');
+document.write('普通の関数をnew式で呼び出してオブジェクトを生成するのは言語仕様としてわかりやすいとはいえないからです。<br>');
+document.write('しかし、クラス定義に必要な機能は満たしています。<br>');
+
+//クラス定義相当
+function MyClass(x, y)
+{
+	//フィールド相当
+	this.x = x;
+	this.y = y;
+	//メソッド相当
+	this.show = function() {
+		document.write('x:' + this.x +' y:' + this.y);
+	}
+}
+//コンストラクタの呼び出し
+var obj = new MyClass(3,2);
+obj.show();
+
+document.write('function MyClass(x, y)<br>');
+document.write('{<br>');
+document.write('	this.x = x;<br>');
+document.write('	this.y = y;<br>');
+document.write('	this.show = function() {<br>');
+document.write('		document.write(\'x:\' + this.x +\' y:\' + this.y);<br>');
+document.write('	}<br>');
+document.write('}<br>');
+document.write('var obj = new MyClass(3,2);<br>');
+document.write('obj.show();<br>');
+
+document.write('<br>');
+document.write('プロパティ名の列挙にはfor in文を使います。<br>');
+document.write('プロパティ値の列挙はfor in文の中でブラケット演算子を使うことで間接的に可能です。<br>');
+document.write('for each in文を使うと直接プロパティ値を列挙できます。<br>');
+
+var obj = { x:3, y:4, z:5 };
+for (var key in obj) {
+	document.write('key = ' + key + '<br>');
+	document.write('val = ' + obj[key] + '<br>');
+}
+document.write('<br>');
+document.write('var obj = { x:3, y:4, z:5 };<br>');
+document.write('for (var key in obj) {<br>');
+document.write('	document.write(\'key = \' + key);<br>');
+document.write('	document.write(\'val = \' + obj[key]);<br>');
+document.write('}<br>');
+
+document.write('連想配列の操作<br>');
+document.write('<br>');
+document.write('連想配列は要素の集合体です。要素はキーと値のペアです。連想配列の操作は、キーで値の取得、要素のセット、要素の削除の３つです。<br>');
+document.write('実態はJavaScriptのオブジェクトなので要素とはプロパティの言い換えに過ぎません。<br>');
+document.write(' キーと値はプロパティ名とプロパティ値の言い換えです。<br>');
+document.write('キーから値を取得する方法はプロパティアクセスの節で説明したようにドット演算子もしくはプラケット演算子を使います。厳密には右辺値として使うのが正しい説明です。<br>');
+document.write('要素のセットは、ドット演算子もしくはプラケット演算子を左辺値にして代入式を書きます。<br>');
+document.write('要素の削除にはdelete演算子を使います。オブジェクトの用語を使うとプロパティの削除です。<br>');
+
+document.write('<br>');
+
+var map = {x:3, y:4};
+document.write(map.x + '<br>');
+delete map.x;
+document.write(map.x + '<br>');
+document.write('<br>');
+document.write('var map = {x:3, y:4};<br>');
+document.write('document.write(map.x);<br>');
+document.write('delete map.x;<br>');
+document.write('document.write(map.x);<br>');
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
