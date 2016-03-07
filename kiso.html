@@ -505,6 +505,18 @@ var global = this;
 document.write('\'global\' in this;の結果:' + ('global' in this) + '<br>');
 
 
+document.write('<br>');
+document.write('<p>型判定（ダックタイピング</p>');
+document.write('　クラスと（インスタンス）オブジェクトという静的な関係であればinstanceof演算によるオブジェクトの型判定で話は終わります。<br>');
+document.write('しかし、JavaScriptのオブジェクト世界はもっと動的な世界です。');
+document.write('例えば、次のようにオブジェクト生成後に新たなプロパティを追加することや、コンストラクタと無関係にオブジェクトを構築していくのは日常茶番です。');
+
+document.write('<br>');
+var obj = {};	//空のオブジェクト生成
+obj.doit = function() { document.write('doit');} //プロパティ
+
+//コンストラクタ無しでオブジェクト生成
+var obj = { doit: function() { document.write('doit'); } }
 
 
 
