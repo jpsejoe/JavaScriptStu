@@ -182,12 +182,47 @@ function MyClass2(x,y) {
 	this.y = y;
 }
 MyClass2.prototype.show = function() {
-	document.write('x:' + this.x + 'y:' + this.y + '<br>');
+	//document.write('x:' + this.x + 'y:' + this.y + '<br>');
 }
 
+document.write('<br>');
+document.write('方判定ダックタイピング<br>');
+document.write('　クラスと（インスタンス）オブジェクトという静的な関係であればinstanceof演算子によるオブジェクトの型判定で話は終わります<br>');
+document.write('オブジェクト生成後に新たなプロパティを追加することや、コンストラクタと無関係にオブジェクトを構築していくのは日常茶番です。<br>');
+
+var obj = {}; //空のオブジェクト生成
+obj.doit = function() { document.write('doit<br>'); } //プロパティの追加
+
+//コンストラクタなしでオブジェクト生成
+var obj = { doit: function() { document.write('doit<br>'); } }
+document.write('<br>');
+document.write('　上記のオブジェクトはdoitというメソッドを持ちます。どんなメソッドを持つかはオブジェクトの振る舞いの重要な指標ですが、doitメソッドの存在はconstructorプロパティやinstanceof演算では判定できません。<br>');
+document.write('　instanceof演算より更に凡庸的な方判定の手段は、そのオブジェクトにどんなプロパティがあるのかを判定する方法です。<br>');
+document.write('オブジェクトの振る舞いを直接調べて型を判定する手法を俗にダックタイピングと呼びます。<br>');
+document.write('　ダックタイピングに使える１つの方法がin演算です。左辺にプロパティ名の文字列、右辺にオブジェクト参照を指定します。オブジェクトが指定プロパティをもつ場合、演算結果が真になります。プロトタイプチェーンで継承したプロパティも判定できます。<br>');
+
+
+document.write('var obj = { doit: function() { document.write(\'doit\'); }} //プロパティの追加 <br>');
+var obj = { doit: function() { document.write('doit<br>'); }} //プロパティの追加
+document.write('doit:');
+document.write('doit' in obj);
+document.write('<br>');
+document.write('toString:');
+document.write('toString' in obj);
+document.write('<br>');
+
+document.write('<br>');
+document.write('<br>');
 
 
 
+
+
+
+
+
+
+document.write('<br>');
 document.write('<br>');
 document.write('<br>');
 document.write('<br>');
