@@ -88,7 +88,112 @@ document.write('document.write(map.x);<br>');
 document.write('delete map.x;<br>');
 document.write('document.write(map.x);<br>');
 
+document.write('<br>');
+document.write('連想配列としてオブジェクトの注意点<br>');
+document.write('　連想配列としてのオブジェクトにはプロトタイプ継承に絡む注意点があります。<br>');
+document.write('プロトタイプ継承を極端に言うと他のオブジェクトのプロパティを継承して、あたかもオブジェクト自身のプロパティのように扱える仕組みです。<br>');
+document.write('　形式的には次のようになります。オブジェクトのプロパティzは直接のプロパティではなくプロントタイプ継承したプロパティです。<br>');
+document.write('<br>');
 
+function MyClass1() {}
+MyClass1.prototype.z = 5;
+var obj = new MyClass1();
+document.write('継承したプロパティ：' + obj.z + '<br>');
+
+
+document.write('function MyClass1() {}<br>');
+document.write('MyClass1.prototype.z = 5; //プロトタイプチェーン上にプロパティｚをセット<br>');
+document.write('var obj = new MyClass1();<br>');
+document.write('document.write(\'継承したプロパティ：\' + obj.z); //プロパティｚをプロトタイプ継承している<br>');
+document.write('<br>');
+document.write('for in 文はプロトタイプ継承したプロパティも列挙します。<br>');
+document.write('for (var key in obj) {<br>');
+document.write('	document.write(\'for文:\' + key);<br>');
+document.write('}<br>');
+
+for (var key in obj) {
+	document.write('for文:' + key + '<br>');
+}
+
+document.write('<br>');
+document.write('　プロトタイプ継承したプロパティはdelete出来ないことに注意してください。前コードの続きはこのようになる<br>');
+document.write('<br>');
+delete obj.z;
+document.write('delete obj.z;<br>');
+document.write('deleteを書けた後の値:' + obj.z + '<br>');
+
+document.write('<br>');
+document.write('　オブジェクトを連想配列として扱う場合、オブジェクトリテラルで生成するのが一般的です。<br>要素の無い連想配列を作るつもりで空のオブジェクトリテラルを使っても、実際にはObjectクラスからプロパティをプロトタイプ継承しているので注意してください。<brこの存在チェックはin演算で可能です。><br>');
+document.write('<br>');
+document.write('var map = {};<br>');
+document.write('document.write(\'結果：\');<br>');
+document.write('document.write(\'toString\' in map);<br>');
+
+var map = {};
+document.write('結果：');
+document.write('toString' in map);
+document.write('<br>');
+
+document.write('<br>');
+document.write(' しかし、for in文で要素を列挙すると何も列挙されません。<br>これはenumerable属性のためです<br>');
+
+document.write('for (var key in map) {<br>');
+document.write('	document.write(\'for文:\' + map);<br>');
+document.write('}<br>');
+
+for (var key in map) {
+	document.write('for文:' + map + '<br>');
+}
+
+document.write('<br>');
+document.write(' プロパティの属性<br>');
+document.write(' 用語が紛らわしいですがプロパティのには属性（attribute)があります<br>');
+document.write('ECMAScriptでは、プロパティ値を「値属性」という属性の１つと位置づけています。<br>');
+document.write('この定義を使うとプロパティとは名前（プロパティ名）と複数の属性の集まりになります。<br>');
+document.write('本書は直感的な馴染みやすさを優先して値と属性を別に扱います。<br>');
+
+
+document.write('変数とオブジェクト<br>');
+document.write('　最初にオブジェクトの参照を変数objに代入しています。このオブジェクトは２つのプロパティを持ちます。<br>');
+document.write('プロパティｘの値は数値３で、プロパティdoitの値は関数です。この関数をメソッドdoitと呼ぶことにします。<br>');
+document.write('　objに対するドット演算子あるいはブラケット演算子でメソッドdoitを呼び出せます。<br>この時、メソッド呼び出し対象のオブジェクトをレシーバオブジェクトと呼びます（つまり変数objが参照するオブジェクトがレシーバオブジェクトです）。 <br>');
+document.write('　呼びだされたメソッド内のthis参照はレシーバオブジェクトを参照します。<br>');
+document.write('　このthis参照の挙動によりjavaやC++のメソッドに似た動作になります。<br>ただ微妙に異なる挙動もすることがあります。<br>');
+document.write('こちらは、レシーバオブジェクトを明確的に指定するために使えます<br>');
+
+var obj = {
+	x:3 ,
+	doit: function() { document.write('method is called. ' + this.x); }
+};
+
+obj.doit();
+document.write('<br>');
+obj['doit']();
+
+
+document.write('<br>');
+document.write('プロトタイプ継承<br>');
+document.write('<br>');
+document.write('　プロトタイプ継承の内部は複雑です。<br>');
+document.write('単にプロトタイプ継承を使いたいだけの人には却って混乱を招く危険があります。<br>');
+
+function MyClass2(x,y) {
+	this.x = x;
+	this.y = y;
+}
+MyClass2.prototype.show = function() {
+	document.write('x:' + this.x + 'y:' + this.y + '<br>');
+}
+
+
+
+
+document.write('<br>');
+document.write('<br>');
+document.write('<br>');
+document.write('<br>');
+document.write('<br>');
+document.write('<br>');
 
 
 
