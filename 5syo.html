@@ -215,6 +215,98 @@ document.write('<br>');
 document.write('<br>');
 
 
+document.write('直接のプロパティのみを列挙するコード<br>');
+document.write('for (var key in obj) {<br>');
+document.write('	if(obj.hasOwnProperty(key)) {<br>');
+document.write('		document.write(key);<br>');
+document.write('	}<br>');
+document.write('}<br>');
+
+document.write('出力結果：');
+for (var key in obj) {
+	if(obj.hasOwnProperty(key)) {
+		document.write(key);
+	}
+}
+document.write('<br>');
+
+document.write('第5のobjctクラス<br>');
+document.write('　objectクラスのcreateメソッドは、オブジェクトリテラル、new式に続くオブジェクト生成の台３の合志区手段です。<br>');
+document.write('第一にプロトタイプオブジェクトにnullを渡すとobjectすらプロトタイプ継承しないオブジェクトを生成できます。<br>');
+
+document.write('<br>');
+
+document.write('//objectをプロトタイプ継承しないオブジェクト<br>');
+document.write('var obj = Object.create(null);<br>');
+document.write('document.write(Object.getPrototypeOf(obj));<br>');
+document.write('document.write(\'toString\' in obj);<br>');
+
+document.write('<br>');
+//objectをプロトタイプ継承しないオブジェクト
+var obj = Object.create(null);
+document.write('Object.getPrototypeOf(obj): ');
+document.write(Object.getPrototypeOf(obj));
+document.write('<br>\'toString\' in obj: ');
+document.write('toString' in obj);
+document.write('<br>');
+document.write('オブジェクトリテラルで生成した場合と同じ効果は次のコードで得られます<br>');
+var obj = Object.create(Object.prototype); // var obj = {}と等価
+document.write('var obj = Object.create(Object.prototype); // var obj = {}と等価<br>');
+
+
+document.write('<br>');
+document.write('Object.createメソッドを使うとプロトタイプ継承したコードをより直感的に記述できます。<br>');
+document.write('<br>');
+function MyClass3() {}
+var Proto = {x:2, y:3};
+MyClass.prototype = Proto;
+var obj = new MyClass3();
+//これと等価なコードが以下
+var Proto = {x:2, y:3};
+var obj = Object.create(Proto);
+
+
+document.write('function MyClass3() {}<br>');
+document.write('var Proto = {x:2, y:3};<br>');
+document.write('MyClass.prototype = Proto;<br>');
+document.write('var obj = new MyClass3();<br>');
+document.write('//これと等価なコードが以下<br>');
+document.write('var Proto = {x:2, y:3};<br>');
+document.write('var obj = Object.create(Proto);<br>');
+document.write('<br>');
+document.write('継承していることを確認:' + obj.x + '-' + obj.y + '<br>');
+
+
+
+document.write('　get属性とset属性に関数を指定するとゲッターとセッターのアクセッサでのみ値にアクセス可能なプロパティを定義できます。<br>');
+document.write('アクセッサとvalue属性は排他の関係です。つまりvalue属性を指定するとアクセッサ(getとsetの両方)は無効になり、アクセッサ（getとsetいずれか)を指定するとvalue属性が無効になります。<br>');
+document.write('　get属性には値を返す関数、set属性には引数を１つ受け取り内部で状態を変更する関数を指定します。<br>');
+document.write('内部的にはプロパティを右辺値としてアクセスした時にゲッター関数が呼ばれて、左辺値として値を代入した時にセッター関数が呼ばれます<br>');
+document.write('言語仕様的にはget属性が副採用のある関数でも違反ではありませんが、意味は無いのでアクセッサらしい関数にしてください。<br>');
+document.write('正しくアクセッサ関数を書けばゲッターのみのプロパティで不変pブジェクと作製の助けになります。<br>');
+
+var obj = Object.create(Object.prototype,
+		{ x:{ get:function(){ document.write('get called<br>');},
+			set:function(v) { document.write('set called');}
+			}
+			});
+
+document.write('<br>');
+document.write(obj.x);
+document.write('<br>');
+obj.x = 1;
+document.write('<br>');
+document.write(obj.x);
+
+
+document.write('<br>');
+
+
+
+
+document.write('<br>');
+document.write('<br>');
+
 
 
 
