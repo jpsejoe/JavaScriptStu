@@ -297,38 +297,21 @@ document.write('<br>');
 obj.x = 1;
 document.write('<br>');
 document.write(obj.x);
-
-
 document.write('<br>');
 
 
 
-
-document.write('<br>');
-document.write('<br>');
-
-
-
-
-
-
-
-
-document.write('<br>');
-document.write('<br>');
-document.write('<br>');
-document.write('<br>');
-document.write('<br>');
-document.write('<br>');
+document.write('Objectクラス<br>');
+document.write('　ObjectクラスはJavaScriptの全てのクラスの基底クラスです。名称と役割はJavaのObjectクラスに類似していますが、継承の仕組みはJavaと異なりプロトタイプ継承です。<br>');
+document.write('　以下の具体例で示す通り、Object.prototypeオブジェクトに追加したプロパティは、任意のオブジェクトから読取りアクセスできます。説明の為にObject.prototypeオブジェクトにプロパティを追加しますが、余程の事情がないカガリ行うべきではありません。影響範囲が広すぎるからです。<br>');
 document.write('<br>');
 
+Object.prototype.foobar = 'FOOBAR'; //Object.prototypeオブジェクトにプロパティを追加
+var d = new Date();
+document.write('Object.prototype.foobar = \'FOOBAR\'; //Object.prototypeオブジェクトにプロパティを追加<br>');
+document.write('var d = new Date();<br>');
 
-
-
-
-
-
-
+document.write('結果-d：' + d.foobar + '<br>');
 </script>
 </body>
 </html>

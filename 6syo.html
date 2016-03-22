@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>学習用第6章</title>
+</head>
+<body>
+<script  type="text/javascript">
+
+document.write('関数の呼び出しの整理<br>');
+document.write('　関数自体に分類があるのではなく、呼び方の違いの分類であることに注意してください。<br>');
+document.write('つまり、ある関数を取り上げてそれをメソッドと呼ぶのは弁みつには正しくありません。<br>');
+document.write('正しくはその関数をメソッド呼び出ししたかどうかだからです。<br>');
+document.write('とは言え、厳密な用語定義はたい窮屈なので、メソッド予備だしを意図して書いた関数は単にメソッドと呼び、同様にコンストラクタ呼び出しを意図した関数をコンストラクタと呼ぶことにします。<br>');
+document.write('　以降、基本的に関数の用語を使いますが、関数とメソッドとコンストラクタは呼び方の違いなので、説明はメソッドにもコンストラクタにも当てはまります。<br>');
+document.write('<br>');
+document.write('　関数宣言文で宣言した関数は、宣言した行より前のコードから呼べます、次の具体例を見てください。<br>');
+document.write('関数スコープ内のコード例ですがグローバルスコープでも事情は同じです。<br>');
+
+function doit() {
+	fun();
+	function fun() { document.write('called<br>');
+	}
+}
+
+doit();
+
+document.write('function doit() {<br>');
+document.write('	fun();<br>');
+document.write('	function fun() { document.write(\'called\');<br>');
+document.write('	}<br>');
+document.write('}<br>');
+document.write('doit();<br>');
+document.write('<br>');
+document.write('関数内で、argumentsオブジェクトを使うと実引数にアクセスできます。<br>');
+
+document.write('<br>');
+function fn() {
+	document.write(arguments.length + '<br>');
+	document.write(arguments[0] + ':' + arguments[1] + ':' + arguments[2] + '<br>');
+}
+
+document.write('function fn() {<br>');
+document.write('	document.write(arguments.length);<br>');
+document.write('	document.write(arguments[0] + \':\' + arguments[1] + \':\' + arguments[2]);<br>');
+document.write('}<br>');
+
+document.write('<br>');
+
+fn(7);
+fn(7,8);
+fn(7,8,9);
+
+
+
+
+</script>
+</body>
+</html>
