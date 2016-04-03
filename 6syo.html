@@ -48,6 +48,224 @@ document.write('<br>');
 fn(7);
 fn(7,8);
 fn(7,8,9);
+document.write('<br>');
+document.write('再帰的関数<br>');
+document.write('　再帰的関数とは内部で自分自身を呼び出す関数です。<br>');
+document.write('このような処理を再帰的処理や再帰呼び出しと呼びます.<br>');
+
+function factorial(n) {
+	if(n <= 1) {
+		return 1;
+	}else{
+		return	n * factorial(n -1);
+	}
+}
+
+document.write('function factorial(n) {<br>');
+document.write('	if(n <= 1) {<br>');
+document.write('		return 1;<br>');
+document.write('	}else{<br>');
+document.write('		return	n * factorial(n -1);<br>');
+document.write('	}<br>');
+document.write('}<br>');
+
+
+
+document.write(factorial(5));
+
+document.write('仕組みは 5!=(5*4*3*2*1) + 120<br>');
+document.write('<br>');
+
+
+document.write('　再帰関数が常に自分自身を呼び続けるよ実行が終わりません。<br>');
+document.write('JavaScriptで無限催奇する何が起きるかは環境依存です。<br>');
+document.write('<br>');
+
+document.write('　再帰関数には再帰処理を停止する条件判定が必要です。<br>');
+document.write('これを停止条件と呼びます。<br>');
+document.write('関数の先頭で引数nの値が１以下かをチェックしているぶぶんです、<br>');
+document.write('停止条件のコードを必ず再帰関数の先頭に書く必要はありませんが、一般的に先頭に書くほうが見通しが良くなります。<br>');
+document.write('　ループで書ける処理は必ず再帰処理でかけます。<br>');
+document.write('逆も真です。再帰呼び出しとループ処理で書くほう平易なコードになります。<br>');
+document.write('またJavaScriptの再帰処理は必ずじも効率的に動作するとは限りません。このため通常JavaScriptの先処理は避けるのが無難です。<br>');
+document.write('　arguments.calleeで実行中の関数オブジェクトへの参照を得られます。<br>');
+document.write('名前をつけていない関数（いわゆる無名関数）で再帰関数を書くときに使えます。<br>');
+document.write('nの階乗を計んする具体例を次に示します。<br>');
+
+// nの階乗(arguments.callee利用)
+var a= (function(n) {
+	if (n <=1) {
+		return 1;
+	} else {
+	       	return n * arguments.callee(n -1);
+	};
+})(5);
+
+document.write('var a= (function(n) {<br>');
+document.write('	if (n <=1) {<br>');
+document.write('		return 1;<br>');
+document.write('	} else {<br>');
+document.write('	       	return n * arguments.callee(n -1);<br>');
+document.write('	};<br>');
+document.write('})(5);<br>');
+document.write('結果' + a + '<br>'); 
+document.write('<br>');
+
+document.write('スコープ<br>');
+document.write('スコープとはなめ（変数名や関数名）の有効範囲のことです。<br>');
+document.write('JavaScriptのスコープは次の２つです<br>');
+document.write('・グローバルスコープ<br>');
+document.write('・関数スコープ<br>');
+document.write('　グローバルスコープは関数外の（トップレベルコード）のスコープです。関数外で宣言した名前はグローバルスコープになります。いわゆるグローバル変数やグローバル関数です。<br>');
+document.write('　関数内で線g年した名前は関数スコープを持ちます。<br>');
+document.write('その関数のみで名前が有効です。グローバルスコープと堆肥でローカルスコープと呼んだり、グローバル変数との対比でローカル変数と呼んだりします。<br>');
+document.write('関数の仮引数に当たるパラメータ変数も関数スコープです。<br>');
+document.write('　関数スコープの動作は、Java（および他の多くのプログラミング言語）のローカルスコープと動作が微妙に異なります。<br>');
+document.write('Javaのメソッドでローカル変数は宣言した行以降のスコープを持ちます。<br>');
+document.write('一方、JavaScriptの関数スコープは宣言した行と無関係です。<br>');
+
+var x = 1;
+function f() {
+	document.write('x = ' + x + '<br>');
+	var x = 2;
+	document.write('x = ' + x + '<br>');
+}
+
+document.write('var x = 1;<br>');
+document.write('function f() {<br>');
+document.write('	document.write(\'x = \' + x);<br>');
+document.write('	var x = 2;<br>');
+document.write('	document.write(\'x = \' + x);<br>');
+document.write('}<br>');
+document.write(f() + '<br>');
+
+document.write('　関数f内の最初の出力は一見、グローバル変数xを表示するように見えます。しかし、このxは次の行で宣言しているローカル変数xです。<br>');
+document.write('なぜなら、ローカル変数xのスコープは関数f無いの全域だからです。<br>');
+document.write('そして、この時点で値の代入をまだしていないので、変数xの値はundefined値値です。つまり関数fは次のコードと等価です。<br>');
+
+function f1() {
+	var x;
+	document.write('x = ' + x + '<br>');
+	x = 2;
+	document.write('x = ' + x + '<br>');
+}
+
+
+document.write('function f1() {<br>');
+document.write('	var x;<br>');
+document.write('	document.write(\'x = \' + x);<br>');
+document.write('	x = 2;<br>');
+document.write('	document.write(\'x = \' + x);<br>');
+document.write('}<br>');
+document.write(f1());
+
+document.write('このようなコードは非常にわかりづらいバグの原因になります。<br>');
+document.write('このためローカル変数は、関数の先頭でまとめて宣言することを推奨します。<br>');
+document.write('　変数は使う直前で宣言すべきというJavaなどの言語の推奨と異なるので注意してください。<br>');
+document.write('<br>');
+
+document.write('Webブラウザとスコープ<br>');
+document.write('　クライアントサイドJavaScriptでは各ウィンドウ（タブ）、各フレーム（iframe含む）ごとにグローバルスコープがあります。<br>');
+document.write('ウィンドウ噛んで相互のグローバルスコープの名前にアクセスはできません。<br>');
+document.write('フレームに関しては親とフレーム間で相互にアクセス可能です。<br>');
+
+
+document.write('ブロックスコープ<br>');
+document.write('　JavaScript(ECMAScript)にはブロックスコープがありません。<br>');
+document.write('これは他の多くのプログラミング言事異なる点です。<br>');
+document.write('ブロックスコープがあると思うと２番目の出力で1を期待しますが、実際には2を出力します。<br>');
+
+var x =1;
+{ var x =2; document.write('x = ' + x + '<br>'); }
+x =2;
+document.write('x = ' + x + '<br>');
+x =2;
+
+document.write('var x =1;<br>');
+document.write('{ var x =2; document.write(\'x = \' + x); }<br>');
+document.write('x =2;<br>');
+document.write('document.write(\'x = \' + x);<br>');
+document.write('x =2;<br>');
+document.write('ブロック内でブロックスコープ変数xを新規に宣言しているように見えますが、実際にはグローバル変数xに値2	を代入しています。つまり次のこーどと等価です。<br>');
+
+var x =1;
+{x  = 2; document.write('x = ' + x + '<br>'); }
+x =2;
+document.write('x = ' + x + '<br>');
+x =2;
+
+document.write('var x =1;<br>');
+document.write('{ var x =2; document.write(\'x = \' + x); }<br>');
+document.write('x =2;<br>');
+document.write('document.write(\'x = \' + x);<br>');
+document.write('x =2;<br>');
+document.write('　ブロックスコープの勘違いは関数スコープでも起きます。for文の中で、ループ変数を宣言するのは、確立されたいディオムですが、ループ変数のスコープはfor文に閉じません。<br>');
+document.write('次のコードは単にローカル変数iを使いまわしているだけです。<br>');
+
+document.write('function f2() {<br>');
+document.write('	var i =1;<br>');
+document.write('	for (var i = 0; i < 10; i++) {<br>');
+document.write('		//省略<br>');
+document.write('	}<br>');
+document.write('	//ここで変数iの値は10<br>');
+document.write('}<br>');
+
+function f2() {
+	var i =1;
+	for (var i = 0; i < 10; i++) {
+		//省略
+	}
+	//ここで変数iの値は10
+}
+
+document.write('letとブロックスコープ<br>');
+document.write('　JavaScriptの独自拡張にブロックスコープを使えるletがあります。<br>');
+document.write('letを使う構文はlet定義(let宣言)、let文、let式の３つあります。<br>');
+document.write('構文は異なりますが、原則は同じです。<br>');
+document.write('let定義(let宣言)はver宣言と同じように使えます。<br>');
+
+//let var1 = [= value1] [, var2 [= value2]] [, ..., varN [=valueN]];
+document.write('let var1 = [= value1] [, var2 [= value2]] [, ..., varN [=valueN]];<br>');
+
+document.write('let宣言した変数はブロックスコープです。スコープを除くとvarで宣言した変数と違いはありません。<br>');
+
+document.write('function f3() {<br>');
+document.write('	let x =1;<br>');
+document.write('	document.write(x);<br>');
+document.write('	{<br>');
+document.write('		let x =2;<br>');
+document.write('		document.write(x);<br>');
+document.write('	}<br>');
+document.write('	document.write(x);<br>');
+document.write('}<br>');
+document.write('<br>');
+document.write('出力結果<br>');
+function f3() {
+	let x =1;
+	document.write(x + '<br>');
+	{
+		let x =2;
+		document.write(x + '<br>');
+	}
+	document.write(x + '<br>');
+}
+
+
+f3();
+document.write('<br>');
+
+
+
+document.write('<br>');
+document.write('<br>');
+
+
+
+
+
+
+
+
 
 
 
