@@ -1,0 +1,58 @@
+ul.ten{
+    list-style-type: disc;
+}
+
+ul.midashi{
+    list-style-type: square;
+}
+
+.box1{
+    width: 700px;
+    background-color: #E3F0FB;
+    border: 1ps #1C79C6 solid;
+}
+.box2{
+    width: 700px;
+    background-color: #86F55E;
+    border: 1ps #5E77F5 solid;
+}
+
+.block {
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 50px #ddd inset;
+    -moz-box-shadow: 0 0 50px #ddd inset;
+    -webkit-box-shadow: 0 0 50px #ddd inset;
+}
+
+.hyou{
+width: 100%;
+border-collapse: collapse;
+}
+.hyou th{
+width: 25%;
+padding: 6px;
+text-align: left;
+vertical-align: top;
+color: #333;
+background-color: #eee;
+border: 1px solid #b9b9b9;
+}
+.hyou td{
+padding: 6px;
+background-color: #fff;
+border: 1px solid #b9b9b9;
+}
+
+code{
+    color:#fff;
+    backfround-color:#000;
+    font-size:1em;
+}
+
+h2 {
+border-bottom: 1px solid #426579;
+border-left: 10px solid #426579;
+padding: 7px;
+}
+

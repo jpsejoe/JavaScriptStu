@@ -1,11 +1,12 @@
 <html>
 <head>
 <title>学習用第6章</title>
+<link rel="stylesheet" href="./css/temp.css" type="text/css" />
 </head>
 <body>
 <script  type="text/javascript">
 
-document.write('関数の呼び出しの整理<br>');
+document.write('<h2>関数の呼び出しの整理</h2>');
 document.write('　関数自体に分類があるのではなく、呼び方の違いの分類であることに注意してください。<br>');
 document.write('つまり、ある関数を取り上げてそれをメソッドと呼ぶのは弁みつには正しくありません。<br>');
 document.write('正しくはその関数をメソッド呼び出ししたかどうかだからです。<br>');
@@ -23,6 +24,7 @@ function doit() {
 
 doit();
 
+document.write('<div class=\"box1\">');
 document.write('function doit() {<br>');
 document.write('	fun();<br>');
 document.write('	function fun() { document.write(\'called\');<br>');
@@ -31,6 +33,7 @@ document.write('}<br>');
 document.write('doit();<br>');
 document.write('<br>');
 document.write('関数内で、argumentsオブジェクトを使うと実引数にアクセスできます。<br>');
+document.write('</div>');
 
 document.write('<br>');
 function fn() {
@@ -38,18 +41,22 @@ function fn() {
 	document.write(arguments[0] + ':' + arguments[1] + ':' + arguments[2] + '<br>');
 }
 
+document.write('<div class=\"box1\">');
 document.write('function fn() {<br>');
 document.write('	document.write(arguments.length);<br>');
 document.write('	document.write(arguments[0] + \':\' + arguments[1] + \':\' + arguments[2]);<br>');
 document.write('}<br>');
+document.write('</div>');
 
 document.write('<br>');
 
+document.write('<div class=\"box2\">');
 fn(7);
 fn(7,8);
 fn(7,8,9);
+document.write('</div>');
 document.write('<br>');
-document.write('再帰的関数<br>');
+document.write('<h2>再帰的関数</h2>');
 document.write('　再帰的関数とは内部で自分自身を呼び出す関数です。<br>');
 document.write('このような処理を再帰的処理や再帰呼び出しと呼びます.<br>');
 
@@ -61,6 +68,7 @@ function factorial(n) {
 	}
 }
 
+document.write('<div class=\"box1\">');
 document.write('function factorial(n) {<br>');
 document.write('	if(n <= 1) {<br>');
 document.write('		return 1;<br>');
@@ -68,13 +76,13 @@ document.write('	}else{<br>');
 document.write('		return	n * factorial(n -1);<br>');
 document.write('	}<br>');
 document.write('}<br>');
-
-
-
 document.write(factorial(5));
+document.write('</div>');
 
+document.write('<div class=\"box2\">');
 document.write('仕組みは 5!=(5*4*3*2*1) + 120<br>');
 document.write('<br>');
+document.write('</div>');
 
 
 document.write('　再帰関数が常に自分自身を呼び続けるよ実行が終わりません。<br>');
@@ -101,6 +109,7 @@ var a= (function(n) {
 	};
 })(5);
 
+document.write('<div class=\"box1\">');
 document.write('var a= (function(n) {<br>');
 document.write('	if (n <=1) {<br>');
 document.write('		return 1;<br>');
@@ -108,14 +117,18 @@ document.write('	} else {<br>');
 document.write('	       	return n * arguments.callee(n -1);<br>');
 document.write('	};<br>');
 document.write('})(5);<br>');
+document.write('</div>');
+document.write('<div class=\"box2\">');
 document.write('結果' + a + '<br>'); 
+document.write('</div>');
 document.write('<br>');
-
-document.write('スコープ<br>');
-document.write('スコープとはなめ（変数名や関数名）の有効範囲のことです。<br>');
+document.write('<h2>スコープ</h2>');
+document.write('スコープとは名前（変数名や関数名）の有効範囲のことです。<br>');
 document.write('JavaScriptのスコープは次の２つです<br>');
-document.write('・グローバルスコープ<br>');
-document.write('・関数スコープ<br>');
+document.write("<ul class\"ten\">");
+document.write('<li>グローバルスコープ</li>');
+document.write('<li>関数スコープ</li>');
+document.write("</ul>");
 document.write('　グローバルスコープは関数外の（トップレベルコード）のスコープです。関数外で宣言した名前はグローバルスコープになります。いわゆるグローバル変数やグローバル関数です。<br>');
 document.write('　関数内で線g年した名前は関数スコープを持ちます。<br>');
 document.write('その関数のみで名前が有効です。グローバルスコープと堆肥でローカルスコープと呼んだり、グローバル変数との対比でローカル変数と呼んだりします。<br>');
@@ -131,13 +144,17 @@ function f() {
 	document.write('x = ' + x + '<br>');
 }
 
+document.write('<div class=\"box1\">');
 document.write('var x = 1;<br>');
 document.write('function f() {<br>');
 document.write('	document.write(\'x = \' + x);<br>');
 document.write('	var x = 2;<br>');
 document.write('	document.write(\'x = \' + x);<br>');
 document.write('}<br>');
+document.write('</div>');
+document.write('<div class=\"box2\">');
 document.write(f() + '<br>');
+document.write('</div>');
 
 document.write('　関数f内の最初の出力は一見、グローバル変数xを表示するように見えます。しかし、このxは次の行で宣言しているローカル変数xです。<br>');
 document.write('なぜなら、ローカル変数xのスコープは関数f無いの全域だからです。<br>');
@@ -151,26 +168,30 @@ function f1() {
 }
 
 
+document.write('<div class=\"box1\">');
 document.write('function f1() {<br>');
 document.write('	var x;<br>');
 document.write('	document.write(\'x = \' + x);<br>');
 document.write('	x = 2;<br>');
 document.write('	document.write(\'x = \' + x);<br>');
 document.write('}<br>');
+document.write('</div>');
+document.write('<div class=\"box2\">');
 document.write(f1());
+document.write('</div>');
 
 document.write('このようなコードは非常にわかりづらいバグの原因になります。<br>');
 document.write('このためローカル変数は、関数の先頭でまとめて宣言することを推奨します。<br>');
 document.write('　変数は使う直前で宣言すべきというJavaなどの言語の推奨と異なるので注意してください。<br>');
 document.write('<br>');
 
-document.write('Webブラウザとスコープ<br>');
+document.write('<h2>Webブラウザとスコープ</h2>');
 document.write('　クライアントサイドJavaScriptでは各ウィンドウ（タブ）、各フレーム（iframe含む）ごとにグローバルスコープがあります。<br>');
 document.write('ウィンドウ噛んで相互のグローバルスコープの名前にアクセスはできません。<br>');
 document.write('フレームに関しては親とフレーム間で相互にアクセス可能です。<br>');
 
 
-document.write('ブロックスコープ<br>');
+document.write('<h2>ブロックスコープ</h2>');
 document.write('　JavaScript(ECMAScript)にはブロックスコープがありません。<br>');
 document.write('これは他の多くのプログラミング言事異なる点です。<br>');
 document.write('ブロックスコープがあると思うと２番目の出力で1を期待しますが、実際には2を出力します。<br>');
@@ -181,11 +202,13 @@ x =2;
 document.write('x = ' + x + '<br>');
 x =2;
 
+document.write('<div class=\"box1\">');
 document.write('var x =1;<br>');
 document.write('{ var x =2; document.write(\'x = \' + x); }<br>');
 document.write('x =2;<br>');
 document.write('document.write(\'x = \' + x);<br>');
 document.write('x =2;<br>');
+document.write('</div>');
 document.write('ブロック内でブロックスコープ変数xを新規に宣言しているように見えますが、実際にはグローバル変数xに値2	を代入しています。つまり次のこーどと等価です。<br>');
 
 var x =1;
@@ -194,6 +217,7 @@ x =2;
 document.write('x = ' + x + '<br>');
 x =2;
 
+document.write('<div class=\"box1\">');
 document.write('var x =1;<br>');
 document.write('{ var x =2; document.write(\'x = \' + x); }<br>');
 document.write('x =2;<br>');
@@ -209,6 +233,7 @@ document.write('		//省略<br>');
 document.write('	}<br>');
 document.write('	//ここで変数iの値は10<br>');
 document.write('}<br>');
+document.write('</div>');
 
 function f2() {
 	var i =1;
@@ -218,7 +243,7 @@ function f2() {
 	//ここで変数iの値は10
 }
 
-document.write('letとブロックスコープ<br>');
+document.write('<h2>letとブロックスコープ</h2>');
 document.write('　JavaScriptの独自拡張にブロックスコープを使えるletがあります。<br>');
 document.write('letを使う構文はlet定義(let宣言)、let文、let式の３つあります。<br>');
 document.write('構文は異なりますが、原則は同じです。<br>');
@@ -229,6 +254,7 @@ document.write('let var1 = [= value1] [, var2 [= value2]] [, ..., varN [=valueN]
 
 document.write('let宣言した変数はブロックスコープです。スコープを除くとvarで宣言した変数と違いはありません。<br>');
 
+document.write('<div class=\"box1\">');
 document.write('function f3() {<br>');
 document.write('	let x =1;<br>');
 document.write('	document.write(x);<br>');
@@ -239,7 +265,6 @@ document.write('	}<br>');
 document.write('	document.write(x);<br>');
 document.write('}<br>');
 document.write('<br>');
-document.write('出力結果<br>');
 function f3() {
 	let x =1;
 	document.write(x + '<br>');
@@ -249,13 +274,777 @@ function f3() {
 	}
 	document.write(x + '<br>');
 }
+document.write('</div>');
 
 
+document.write('<div class=\"box2\">');
+document.write('出力結果<br>');
 f3();
+document.write('</div>');
 document.write('<br>');
 
 
+document.write('<h2>スコープ</h2><br>');
+document.write('スコープとは名前(変数名や関数名)の有効範囲のことです。スコープについては<strong>「5-3変数とプロジェクト」</strong>と<strong>「5-4変数名の解決」</strong>も参照してください。<br>');
+document.write('JapaScriptのスコープは次の1つです。<br>');
+document.write("<ul class=\"ten\">");
+document.write("<li>グローバルスコープ</li>");
+document.write("<li>関数スコープ</li>");
+document.write('</ul><br>');
+document.write('&nbsp;グローバルスコープは関数の外（トップレベルコード）のスコープです。関数の外で宣言した名前はグローバルスコープになります。いわゆるグローバル変数やグローバル関数です。<br>');
+document.write('&nbsp;関数内で宣言した名前は関数スコープを持ちます。その関数内でのみ有効な名前が有効です。グローバルスコープとの対比でローカルスコープと呼んだり、グローバル変数との退避でローカル変数と呼んだりします。関数の仮引数に当たるパラメータ変数も関数スコープです。<br>');
+document.write('&nbsp;関数スコープの動作は、Java（およびほか多くのプログラミング言語）のローカルスコープと動作が微妙に異なります。Javaのメソッドでローカル変数は宣言した行以降のスコープを持ちます。一方、JavaScriptの関数スコープは宣言した行と無関係です。<br>');
+document.write('<br>');
+document.write('<br>');
+document.write('<br>');
 
+var x = 1;
+function f4() {
+    document.write("x =" + x +"<br>");
+    var x = 2;
+    document.write("x =" + x +"<br>");
+}
+
+document.write('<br>');
+document.write('<div class=\"box1\">');
+document.write("var x = 1;<br>");
+document.write("function f4() {<br>");
+document.write("    document.write(\"x =\" + x\");<br>");
+document.write("    var x = 2;<br>");
+document.write("    document.write(\"x =\" + x\");<br>");
+document.write("}<br>");
+document.write("f4();<br>");
+document.write('</div>');
+document.write('<div class=\"box2\">');
+f4();
+document.write('</div>');
+document.write('<br>');
+document.write('<br>');
+
+document.write('&nbsp;関数f5内の最初のdocument.writeは一件、グローバル変数xを表示するように見えます。しかし、このxは次行で宣言しているローカル変数xです。なぜなら、ローカル変数xのスコープは関数f5内の全域だからです。</div>');
+document.write('そしてこの時点で値の代入をまだしていないので、変数xの値はundefined値です。つまり関数f5は次のコードと等価です。</div>');
+
+
+document.write('<div class=\"box1\">');
+document.write("var x;<br>");
+document.write("    document.write(\"x =\" + x\");<br>");
+document.write("x = 2;<br>");
+document.write("    document.write(\"x =\" + x\");<br>");
+document.write('</div>');
+
+
+document.write('<div class=\"box2\">');
+function f5(){
+var x;
+document.write("x =" + x +"<br>");
+x = 2;
+document.write("x =" + x +"<br>");
+}
+document.write(f5());
+document.write('</div>');
+
+
+document.write('<br>');
+document.write("<h2>Webブラウザとスコープ</h2>");
+document.write('&nbsp;クライアントサイドJavaScriptでは各ウィンド（タブ）、各フレーム（iframe含む)ごとにグローバルスコープがあります。ウィンドウ間で相互のグローバルスコープの名前にアクセスはできません。<br>');
+document.write('フレームについては親とフレーム間で相互にアクセス可能です。<br>');
+
+
+document.write("<h2>ブロックスコープ</h2>");
+document.write('&nbsp;JavaScript(ECMAScript)にはブロックスコープがありません。これは他の多くのプログラミング言語と異なる点です。ブロックスコープがあると思うと2番めのdocument.writeで１を期待しますが実際には２が出力されます。<br>');
+document.write('<br>');
+
+
+document.write('<div class=\"box1\">');
+document.write("var x = 1;<br>");
+document.write("{var x = 2; document.write(\"x = \" + x); }<br>");
+document.write("x = 2;<br>");
+document.write("document.write(\"x = \" + x);<br>");
+document.write('</div>');
+document.write('<div class=\"box2\">');
+var x = 1;
+{var x = 2; document.write("x = " + x + "<br>"); }
+x = 2;
+document.write("x = " + x + "<br>");
+document.write('</div>');
+document.write('ブロック内でブロックスコープの変数xを新規に宣言しているように見えますが、実際にはグローバル変数xに値２を代入しています。つまり次のコードと等価です。<br>');
+
+document.write('<div class=\"box1\">');
+document.write("var x = 1;<br>");
+document.write("{x = 2; document.write(\"x = \" + x); }<br>");
+document.write("x = 2;<br>");
+document.write("document.write(\"x = \" + x);<br>");
+document.write('</div>');
+
+document.write('<div class=\"box2\">');
+var x = 1;
+{x = 2; document.write("x = " + x + "<br>");}
+ x = 2;
+document.write("x = " + x + "<br>");
+document.write('</div>');
+
+
+
+
+document.write("<h2>letとスコープ</h2>");
+document.write('&nbsp;ECMAScript第５版にブロックスコープはありませんが、JavaScriptの独自拡張にブロックスコープを使える letがあります。letを使う構文はlet定義（let宣言）、let分、let式の３つあります。構文は異なりますが、原則は同じです。<br>');
+document.write('&nbsp;let定義（let宣言）はvar宣言と同じように使えます。次の構文で変数を宣言できます。<br>');
+document.write("<div class=\"block\">");
+document.write("let var1 [=value1][, var2 [= value2]] [, ..., varN [= valueN]];");
+document.write("</div>");
+document.write('&nbsp;let宣言で宣言した変数はブロックスコープです。スコープを除くとvarで宣言した変数と違いはありません。<br>');
+
+
+
+document.write('<div class=\"box1\">');
+document.write("function f6(){<br>");
+document.write("    let x = 1;<br>");
+document.write("    ducument.write(x);<br>");
+document.write("    {<br>");
+document.write("        let x = 2;<br>");
+document.write("        ducument.write(x);<br>");
+document.write("    }<br>");
+document.write("    ducument.write(x);<br>");
+document.write("}<br>");
+document.write('</div>');
+
+
+document.write('<div class=\"box2\">');
+function f6(){
+    let x = 1;
+    document.write(x);
+    document.write('<br>');
+    {
+        let x = 2;
+        document.write(x);
+        document.write('<br>');
+    }
+    document.write(x);
+    document.write('<br>');
+}
+document.write(f6());
+document.write('</div>');
+
+document.write('&nbsp;スコープの違いを除くとlet変数（let宣言で宣言した変数）はvar変数と限りなく似た挙動をします。<br>');
+
+
+document.write('<div class=\"box1\">');
+document.write("function f7(){<br>");
+document.write("    let x = 1;<br>");
+document.write("    {<br>");
+document.write("        document.write(x);<br>");
+document.write("    }<br>");
+document.write("}<br>");
+document.write("<br>");
+document.write("function f8() {<br>");
+document.write("    let x = 1;<br>");
+document.write("    {<br>");
+document.write("        document.write(x);<br>");
+document.write("        let x = 2;<br>");
+document.write("        document.write(x);<br>");
+document.write("    }<br>");
+document.write("}<br>");
+document.write('</div>');
+
+
+document.write('<div class=\"box2\">');
+function f7(){
+    let x = 1;
+    {
+        document.write(x + "<br>");
+    }
+}
+
+function f8() {
+    let x = 1;
+    {
+        document.write(x + "<br>");
+        x = 2;
+        document.write(x + "<br>");
+    }
+}
+document.write('f7=<br>');
+document.write(f7());
+document.write('<br>');
+document.write('f8=<br>');
+document.write(f8());
+document.write('</div>');
+document.write('<br>');
+document.write('let宣言とlet分の混じった具体例<br>');
+
+document.write('<div class=\"box1\">');
+document.write("function f9(){<br>");
+document.write("    var x = 1;<br>");
+document.write("    let (x = 2) {<br>");
+document.write("        document.write(x);<br>");
+document.write("        x = 3;<br>");
+document.write("        document.write(x);<br>");
+document.write("    }<br>");
+document.write("    document.write(x);<br>");
+document.write("}<br>");
+document.write('</div>');
+
+document.write('<div class=\"box2\">');
+function f9(){
+    var x = 1;
+    //let (x = 2) {
+        document.write(x + "<br>");
+        x = 3;
+        document.write(x + "<br>");
+    //}
+    document.write(x + "<br>");
+}
+document.write(f9());
+document.write('</div>');
+document.write('※ブラウザでは実行されない<br>');
+
+document.write("<h2>入れ子の関数とスコープ</h2>");
+
+document.write('<div class=\"box1\">');
+document.write("function f10(){<br>");
+document.write("    var x =1;<br>");
+document.write("    function f2(){<br>");
+document.write("        var y = 2;<br>");
+document.write("        document.write(f2);<br>");
+document.write("        document.write(x);<br>");
+document.write("        document.write(y);<br>");
+document.write("    }<br>");
+document.write("    function f3(){<br>");
+document.write("        document.write(f3);<br>");
+document.write("        document.write(y);<br>");
+document.write("    }<br>");
+document.write("    f2();<br>");
+document.write("    f3();<br>");
+document.write("}<br>");
+document.write('</div>');
+
+
+document.write('<div class=\"box2\">');
+function f10(){
+    var x =1;
+    function f2(){
+        var y = 2;
+        document.write("f2<br>");
+        document.write(x + "<br>");
+        document.write(y + "<br>");
+    }
+
+    function f3(){
+        document.write("f3<br>");
+        //document.write(y + "<br>");
+    }
+    f2();
+    f3();
+}
+document.write(f10());
+document.write('</div>');
+
+document.write("<h2>シャドーイング</h2>");
+document.write("&nbsp;シャドーイングはやや専門的な用語になりますが、スコープの小さい同名の変数（や関数）でスコープの大きい名前を隠すことを指します。多くは意図せず置きてバグの元になります。たとえば次のコードはグローバル変数nをローカル変数ｎが隠しています。");
+
+
+document.write('<div class=\"box1\">');
+document.write("var n = 1;<br>");
+document.write("function f11(){<br>");
+document.write("    var n = 2;<br>");
+document.write("    document.write(n);<br>");
+document.write("}<br>");
+document.write("document.write(f11());<br>");
+document.write('</div>');
+
+
+document.write('<div class=\"box2\">');
+var n = 1;
+function f11(){
+    var n = 2;
+    document.write(n + "<br>");
+}
+document.write(f11() + "<br>");
+document.write('</div>');
+
+
+document.write("<h2>関数はオブジェクト</h2>");
+document.write("&nbsp;関数はオブジェクトの１種です。内部的にはFunctionオブジェクトを継承します。これは次のようにconstructorプロパティで確認できます。");
+
+
+document.write('<div class=\"box1\">');
+document.write("function f12() { }<br>");
+document.write("f12.constructor");
+document.write('</div>');
+
+document.write('<div class=\"box2\">');
+function f12() { }
+document.write(f12.constructor);
+document.write('</div>');
+
+document.write('<br>');
+document.write('<br>');
+document.write("&nbsp;関数リテラルを変数に代入することと、関数オブジェクトの参照を変数に代入することは、同じことを違う表現で言い換えているだけです。一般的な文脈で関数と呼ぶものは関数オブジェクトの参照と等価です。<br>");
+document.write("以下に上げた４つはかた地だけ見ると全く違いますが、大局的に見ると実態（名無しオブジェクトの生成とそれを参照する名前を水日つけるコードという共通点があります。<br>");
+
+
+document.write('<div class=\"box1\">');
+document.write("var obj = {};<br>");
+document.write("var obj = new MyClass();<br>");
+document.write("var obj = function() {};<br>");
+document.write("function obj() {}<br>");
+document.write('</div>');
+document.write('<br>');
+
+document.write("&nbsp;使う場面は多くありませんが、次のようにFunction関数をコンストラクタ呼び出しして関数オブジェクトを生成できます。<br>");
+
+
+document.write('<div class=\"box1\">');
+document.write("var sum = Function('a', 'b', 'return Number(a) + Number(b);');<br>");
+document.write("sum(3,4)");
+document.write('</div>');
+
+document.write('<div class=\"box2\">');
+var sum = Function('a', 'b', 'return Number(a) + Number(b);');
+document.write(sum(3,4));
+document.write('</div>');
+
+document.write('<br>');
+document.write("&nbsp;関数はオブジェクトなので、当然、オブジェクトに対するプロパティの読み書きが出来ます。<br>");
+
+document.write('<div class=\"box1\">');
+document.write("function f13() {}<br>");
+document.write("f.foo = 'FOO';<br>");
+document.write("document.write('f.foo');");
+document.write('</div>');
+
+document.write('<div class=\"box2\">');
+function f13() {}
+f.foo = 'FOO';
+document.write(f.foo + "<br>");
+document.write('</div>');
+
+document.write("&nbsp;プロパティに別の関数を代入すると、関数（オブジェクト）がメソッドをもつ関係も作れます。<br>");
+
+document.write('<div class=\"box1\">');
+document.write("f.doit = function f14() { document.write('doit called'); };<br>");
+document.write("f.doit();<br>");
+document.write('</div>');
+
+document.write('<div class=\"box2\">');
+f.doit = function f14() { document.write("doit called"); };
+f.doit();
+document.write('</div>');
+document.write('<br>');
+
+document.write("<h2>関数名とデバッグ容易性</h2>");
+document.write("&nbsp;「オブジェクトは本質的に名前がない」と説明してきました。関数はオブジェクトなので、関数オブジェクト自身も名前がありません。原理原則で言えば嘘ではありませんが、この説明には少し細くが必要です<br>");
+document.write("&nbsp;関数オブジェクト自身は表示名を持てるからです。関数宣言文や関数リテラル式で関数名をしてした場合が該当します。<br");
+document.write("&nbsp;&nbsp;次のように記述した時、fn_nameの部分が関数オブジェクトの表示名になります。<br>");
+
+document.write("<div class=\"block\">");
+document.write("function fn_name() { ...}<br>");
+document.write("var fn = function fn_name() {...}<br>");
+document.write("</div>");
+
+document.write("&nbsp;「関数の表示名」という表現は本書独自の用語です。一般的な関数名と区別するため敢えて用語を分けます。");
+document.write("&nbsp;関数名は関数pブジェクとの参照をもつ変数名です。一方。「関数の表示名」は関数オブジェクト自身に埋め込まれた名前です。<br>");
+document.write("「関数の表示名」だけでは関数呼び出しに積まえませんが、関数宣言文の場合はfunctionの後ろに書いた名前は関数名にもなるので、表面上は区別できません。<br>");
+document.write("内部的に関数名と関数の表示名が別個に存在するだけです。これは次のような意味のない些細なコードで確認できます。<br>");
+
+document.write('<div class=\"box1\">');
+document.write("function f15() {}<br>");
+document.write("var fn2 = f15;<br>");
+document.write("f15 = null<br>");
+document.write("document.write(fn2);<br>");
+document.write('</div>');
+
+document.write('<div class=\"box2\">');
+function f15() {}
+var fn2 = f15;
+f15 = null
+document.write(fn2);
+
+document.write('</div>');
+
+document.write("&nbsp;関数の表示名は関数オブジェクトをdocument.writeなどで表示した時に使われます。たとえばconstructorプロパティの参照先関数オブジェクトを表示した時に見える名前がそれです。<br>");
+document.write("更に有効性を発揮するのがデバッグ時のコールスタック時の表示です。<br>");
+document.write("&nbsp;JavaScriptプログラミングでは関数宣言文により関数リテラル式を使う機会のほうが増える思考にあります。この時、functionに続く関数の表示名を省略しがちです。しかし、デバッグ時に関数の表示名が助けになることがあるので、検証してみてください。<br>");
+
+document.write("<h2>functionクラス</h2>");
+document.write("&nbsp;Functionクラスは関数オブジェクトのためのクラスです。Functionクラスの関数またはコンストラクタ呼び出しを次にまとめます。<br>");
+
+document.write("<table class=\"hyou\">");
+document.write("<tbody>");
+document.write("<tr>");
+document.write("<th>関数またはコンストラクタ</th>");
+document.write("<th>説明</th>");
+document.write("</tr>");
+document.write("<tr>");
+document.write("<th>Function(p0,p1, ....., body)</th>");
+document.write("<th>引数p0,p1,.....で関数本体がbody(文字列)のFunctionインスタンスを生成</th>");
+document.write("</tr>");
+document.write("<tr>");
+document.write("<th>new Function(p0,p1, ....., body)</th>");
+document.write("<th>引数p0,p1,.....で関数本体がbody(文字列)のFunctionインスタンスを生成</th>");
+document.write("</tr>");
+document.write("</tbody>");
+document.write("</table>");
+
+document.write("&nbsp;特別な理由がない限り、これらを使うより関数宣言文もしくはリテラル表記によるかんすうせいせいを推奨します。Functionクラスのプロパティを以下にまとめます。<br>");
+
+document.write("<table class=\"hyou\">");
+document.write("<tbody>");
+document.write("<tr>");
+document.write("<th>プロパティ名</th>");
+document.write("<th>説明</th>");
+document.write("</tr>");
+document.write("<tr>");
+document.write("<th>prototype</th>");
+document.write("<th>プロトタイプチェーン用</th>");
+document.write("</tr>");
+document.write("<tr>");
+document.write("<th>length</th>");
+document.write("<th>値は1</th>");
+document.write("</tr>");
+document.write("</tbody>");
+document.write("</table>");
+
+document.write("<h2>Functionクラスの継承</h2>");
+document.write("&nbsp;JavaScriptの関数はFunctionクラスのインスタンスオブジェクトです。プロトタイプ継承の用語を使うとJavaScriptの関数のプロトタイプオブジェクトはFunction.prototypeです。<br>");
+
+document.write('<div class=\"box1\">');
+document.write("function f16() {}<br>");
+document.write("f16.constructor === Function;<br>");
+document.write("f16.__proto__ === Function.prototype;<br>");
+document.write('</div>');
+
+document.write('<div class=\"box2\">');
+function f16() {}
+document.write(f16.constructor === Function);
+document.write('<br>');
+document.write(f16.__proto__ === Function.prototype);
+document.write('<br>');
+document.write('</div>');
+
+document.write("&nbsp;紛らわしいですが、Function関数もFunctionクラスのインスタンスオブジェクトです。自己参照的ですが、次の関係があるだけです。<br>");
+
+
+document.write('<div class=\"box1\">');
+document.write("Function === Function.constructor<br>");
+document.write("Function.__proto__ === Function.prototype<br>");
+document.write('</div>');
+
+document.write('<div class=\"box2\">');
+document.write(Function === Function.constructor);
+document.write('<br>');
+document.write(Function.__proto__ === Function.prototype);
+document.write('<br>');
+document.write('</div>');
+
+document.write("&nbsp;関数がFunctionオブジェクト（Functionクラス）からプロトタイプ継承する意味は、関数に対してプロパティの読み込みアクセス（メソッド呼び出し）が出来ることを意味します。ことがにうすると関係性が複雑ですが実用上の意味はこれだけです。<br>");
+
+
+document.write("<h2>入れ子の関数宣言とクロージャ</h2>");
+document.write("&nbsp;クロージャ（Closure）という言葉を初めて聞く人の為に厳密さを捨て最初に表層的な理解を試します。<br>");
+
+document.write('<div class=\"box1\">');
+document.write("var fn = f16();");
+document.write('<br>');
+
+document.write("fn()");
+document.write('<br>');
+document.write("fn()");
+document.write('<br>');
+document.write('</div>');
+document.write("※ブラウザでは実行されない");
+document.write('<br>');
+
+document.write('<div class=\"box2\">');
+var fn = f16();
+document.write(fn + "<br>");
+document.write(fn + "<br>");
+document.write('</div>');
+
+
+document.write("&nbsp;関数fの中身は後ほど解説します。関数fの返り値は関数(オブジェクトの参照)です。これは変数fnに代入します。関数fnは呼び出す度に１ずつ増える数値を出力します。<br>");
+document.write("Java風に想像すると、オブジェクトがプライベートフィールドの内部カウンタを持ち、メソッドを呼ぶ度に内部カウンタが増加する実装のようです。ただし、見た目はただの関数呼び出しです。<br>");
+document.write("関数f16の中身は次のようになっています。<br>");
+
+function f16() {
+    var cnt = 0;
+    return function() { return ++cnt; }
+}
+
+document.write('<div class=\"box1\">');
+document.write("function f16() {<br>");
+document.write("    var cnt = 0;<br>");
+document.write("    return function() { return ++cnt; }<br>");
+document.write("}<br>");
+document.write('</div>');
+
+document.write("&nbsp;クロージャを表層的に理解すると、状態を持つ関数です。表層的にクロージャを使うだけであれば、この理解でほとんど困ることはありません。あるいは関数を抜けた後にも行くているローカル変数という理解でも構いません。<br>");
+document.write("&nbsp;上記例で言うと関数内のローカル変数cntが関数fの呼出し後にも生きているという見方です<br>");
+
+document.write("<h2>クロージャの仕組み</h2>");
+document.write("<ul class=\"midashi\"><li>入れ子の関数宣言</li></ul>");
+
+document.write("&nbsp;関数宣言の中に別の関数宣言を書けること（入れ子の関数宣言）がクロージャの前提です。入れ子の関数宣言の簡単な例を次に示します。なお下記例は関数宣言文で書いていますが、関数リテラル式で書いても同じです。<br>");
+
+document.write('<div class=\"box1\">');
+document.write("function f17() {<br>");
+document.write("    function g(){<br>");
+document.write("        document.write('g is called');<br>");
+document.write("    }<br>");
+document.write("    g();<br>");
+document.write("}<br>");
+document.write('</div>');
+
+
+document.write('<div class=\"box2\">');
+function f17() {
+    function g(){
+        document.write('g is called');
+    }
+    g();
+}
+f17();
+
+document.write('</div>');
+document.write('<br>');
+
+document.write("&nbsp;関数f17の中に関数gの宣言と呼び出し行があります。関数f17を呼ぶと間接的に関数gが呼ばれます。<br>この通さ自体は直感通りで不思議な点はありません。不思議さはありませんが、今後のために内部動作を説明します。<br>");
+document.write("&nbsp;トップレベルコードでの関数fの宣言は、関数オブジェクトの生成と変数fによる関数オブジェクトの参照を意味します。変数f17はグローバルオブジェクトのプロパティです。以下、用語として変数を使わずプロパティで説明します。<br>");
+document.write("&nbsp;JavaScriptでは関数を呼ぶ度にCallオブジェクトが暗黙に生成されます。関数f17呼び出し時のCallオブジェクトを便宣上Call-fオブジェクトと呼ぶことにします。Callオブジェクトは関数呼び出しが終わると消滅します。<br>");
+document.write("&nbsp;関数f17内の関数gの宣言は関数gに対応する関数オブジェクトを生成します。名前gはCall-gオブジェクトのプロパティです。Callオブジェクトは関数呼出しごとに独立しているので、関数gを呼ぶと別のCallオブジェクトが暗黙に生成されます。このCallオブジェクトを便宣上Call-gオブジェクトと呼ぶことにします。<br>");
+document.write("&nbsp;関数gを抜けるとCall-gオブジェクトは自動で消滅します。同様に関数f17を抜けるとCall-fオブジェクトが消滅します。この時、gが参照する関数オブジェクトは、プロパティgがCall-fオブジェクトとともに消滅するので、参照元が無くなる結果、消滅します（ガベージコレクションのため）。<br>");
+
+document.write('<br>');
+
+document.write("<ul class=\"midashi\"><li>入れ子の関数とスコープ</li></ul>");
+document.write("&nbsp;次のように少しコードを改変します。<br>");
+
+document.write('<div class=\"box1\">');
+document.write("function f18() {<br>");
+document.write("    var n= 123;<br>");
+document.write("    function g() {<br>");
+document.write("        document.write('n is ' + n);<br>");
+document.write("        document.write('g is Called');<br>");
+document.write("    }<br>");
+document.write("    g();<br>");
+document.write("}<br>");
+document.write("f18();<br>");
+document.write('</div>');
+
+document.write('<div class=\"box2\">');
+function f18() {
+    var n= 123;
+    function g() {
+        document.write('n is ' + n);
+        document.write('<br>');
+        document.write('g is Called');
+        document.write('<br>');
+    }
+    g();
+}
+f18();
+document.write('</div>');
+document.write('<br>');
+
+document.write("&nbsp;これも直感通りの動作と言えるでしょう。見たままにスコープを考えると、入れ子に宣言した関数gは外側の関数f18のローカル変数（この場合は変数n）にアクセス可能、と説明できます。<br>");
+document.write("&nbsp;関数内で変数名の解決はCallオブジェクトのプロパティ、グローバルオブジェクトのプロパティの順で探すと説明しました。入れ子の関数宣言をすると、内部の関数は自分自身が呼ばれた時のCallオブジェクトの次に外側のCallオブジェクトのプロパティを探します。<br>");
+document.write("&nbsp;この仕組を<strong>スコープチェーン</strong>と呼びます<br>");
+
+document.write("<ul class=\"midashi\"><li>入れ子の関数を返す</li></ul>");
+
+document.write("&nbsp;更にコードを改変します。<br>");
+
+document.write('<div class=\"box1\">');
+document.write("function f19() {<br>");
+document.write("    var n= 123;<br>");
+document.write("    function g() {<br>");
+document.write("        document.write('n is ' + n);<br>");
+document.write("        document.write('g is Called');<br>");
+document.write("    }<br>");
+document.write("    return g;<br>");
+document.write("}<br>");
+document.write("f19();<br>");
+document.write('</div>');
+
+document.write('<div class=\"box2\">');
+function f19() {
+    var n= 123;
+    function g() {
+        document.write('n is ' + n);
+        document.write('<br>');
+        document.write('g is Called');
+        document.write('<br>');
+    }
+    return g;
+}
+document.write(f19());
+document.write('</div>');
+
+document.write("&nbsp;return gにより関数f19は関数オブジェクト（の参照）を返します。関数f19の呼び出し結果は関数オブジェクトです。この時、関数f19に対応するCallオブジェクト(Call-fオブジェクト)は生成されますが、(関数f19を抜けると消滅)、関数gの呼び出しは起きていないので、対応するCallオブジェクト(Call-gオブジェクト）はまだ生成されていないことに注意してください<br>");
+
+
+document.write("<ul class=\"midashi\"><li>クロージャ</li></ul>");
+document.write("&nbsp;関数fの返り値を別の変数に代入してみます。代入せず直接関数呼び出しをしてもいいのですが、わかりやすさのために代入します。変数名はg2にします。そしてg経由で関数を呼んでみます<br>");
+
+document.write('<div class=\"box1\">');
+document.write("var g2 = f19()<br>");
+document.write("g2();<br>");
+document.write('</div>');
+
+document.write('<div class=\"box2\">');
+var g2 = f19()
+g2();
+document.write('</div>');
+
+document.write("&nbsp;この結果は関数gを関数f19の外側から呼べたことを意味します。更に関数ｆのローカル変数nが関数f19の呼出し後も生きていることも意味します。表層だけを見るとJavaなど他の手続き型言語の常識に反します(一般に関数を抜けた後にローカル変数は無効です)。<br>");
+document.write("&nbsp;関数f19を読んだ時のCallオブジェクト(Call-fオブジェクト)のプロパティgが参照していた関数オブジェクト(何度も言いますがオブジェクトそのものは名無しです)をg2が参照します。参照元があるかぎりオブジェクトはガベージコレクションの対象にならないので、名前g2が有効な限り、関数オブジェクトも生きています。<br>");
+document.write("&nbsp;この関数オブジェクトはCall-fオブジェクトへ参照を持ちます（スコープチェーンのために使います）。この結果、名前g2から参照されるこの関数オブジェクトが残る限り、Call-fオブジェクトも残ります。<br>これが関数f19を抜けた後もローカル変数ｎが生きている理由です。<br>");
+document.write("&nbsp;次のように関数f19を2回呼ぶとg2とg3はそれぞれ異なる関数オブジェクトを参照します。そして、これらの関数オブジェクトはそれぞれ異なるCall-fオブジェクトを参照します。<br>なぜならCallオブジェクトは関数呼び出しごとに生成されるオブジェクトだからです。<br>");
+
+document.write('<div class=\"box1\">');
+document.write("var g2 = f19()<br>");
+document.write("var g3 = f19()<br>");
+document.write("g2();<br>");
+document.write("g3();<br>");
+document.write('</div>');
+
+document.write('<div class=\"box2\">');
+var g2 = f19()
+var g3 = f19()
+g2();
+g3();
+document.write('</div>');
+
+document.write("&nbsp;g2とg3が参照するそれぞれの関数を呼んだ時の違いを表面化させるため、多少技巧的ですが、次のようにコードを変更します<br>それぞれのCall-fオブジェクトが異なるので、それぞれのプロパティ(関数f20から見るとローカル変数n）をg2とg3からアクセスできます。<br>");
+
+document.write('<div class=\"box1\">');
+document.write("function f20(arg){<br>");
+document.write("    var n = 123 + Number(arg);<br>");
+document.write("    function g() {<br>");
+document.write("        document.write('n is ' + n);<br>");
+document.write("        document.write('g is Called');<br>");
+document.write("    }<br>");
+document.write("    return g;<br>");
+document.write("}<br>");
+document.write("<br>");
+document.write("var g2 = f20(2);<br>");
+document.write("var g3 = f20(3);<br>");
+document.write("g2();<br>");
+document.write("g3();<br>");
+document.write("var n = 7; //グローバル変数nを定義しても無関係<br>");
+document.write("g3();<br>");
+document.write('</div>');
+
+document.write('<div class=\"box2\">');
+function f20(arg){
+    var n = 123 + Number(arg);
+    function g() {
+        document.write('n is ' + n);
+        document.write("<br>");
+        document.write('g is Called');
+        document.write("<br>");
+    }
+    return g;
+}
+
+var g2 = f20(2);
+var g3 = f20(3);
+g2();
+g3();
+var n = 7; //グローバル変数nを定義しても無関係
+g3();
+document.write('</div>');
+document.write('<br>');
+
+document.write("<ul class=\"midashi\"><li>クロージャと環境</li></ul>");
+document.write("&nbsp;内部動作を離れて現象を抽象的に見なおしてみます。g2とg3の呼び出し結果は異なります。これは同じコードから異なる状態をもつ関数を作れたことを意味します。<br>これがクロージャです。少し専門用語を使うと、関数呼び出し時点における変数名解決の<strong>環境</strong>を保持した関数をクロージャと呼びます。<br>");
+document.write("&nbsp;クロージャとは、（一般用語としての）状態をもつ関数、と説明します。ただし、変数名解決の対応を保持しているだけで、オブジェクトの状態全てを保持するのではないことは知っておいてください。つまりクロージャは（入れ子の外側の関数呼び出し時に暗黙に生成される）Callオブジェクトを保持しますが、Callオブジェクトのプロパティから参照される先のオブジェクトの状態までは保証しません。<br>&nbsp;クロージャのイディオムとして次のように関数リテラル式をそのままreturn文に書くことが多いので覚えておいてください。<br>");
+
+
+
+
+document.write('<div class=\"box1\">');
+document.write("function f21(arg) {<br>");
+document.write("    var n = 123 + Number(arg);<br>");
+document.write("    return function() {<br>");
+document.write("        document.write('n is ' + n);<br>");
+document.write("        document.write('g is Called');<br>");
+document.write("    };<br>");
+document.write("}<br>");
+document.write("f21(5)<br>");
+document.write('</div>');
+
+
+
+document.write('<div class=\"box2\">');
+function f21(arg) {
+    var n = 123 + Number(arg);
+    return function() {
+        document.write('n is ' + n);
+        document.write("<br>");
+        document.write('g is Called');
+        document.write("<br>");
+    };
+}
+document.write(f21(5));
+document.write('</div>');
+document.write('<br>');
+
+document.write("<ul class=\"midashi\"><li>クロージャの落とし穴</li></ul>");
+document.write("&nbsp;もし関数f22内に2つの関数宣言があると、２つは同じCall-fオブジェクトを参照します。これはJavaScript のクロージャで間違えやすい動作です。");
+
+document.write('<div class=\"box1\">');
+document.write("function f22(arg){<br>");
+document.write("    var n = 123 + Number(arg);<br>");
+document.write("    function g() { document.write('n is ' + n);document.write('g is called');}<br>");
+document.write("    n++;<br>");
+document.write("    function gg() { document.write('n is ' + n);document.write('gg is called');}<br>");
+document.write("    return [g,gg];<br>");
+document.write("}<br>");
+document.write("var g_and_gg = f22(1);<br>");
+document.write("g_and_gg[0]();<br>");
+document.write("g_and_gg[1]();<br>");
+document.write('</div>');
+
+document.write('<div class=\"box2\">');
+function f22(arg){
+    var n = 123 + Number(arg);
+    function g() { document.write('n is ' + n + '<br>');document.write('g is called<br>');}
+    n++;
+    function gg() { document.write('n is ' + n + '<br>');document.write('gg is called<br>');}
+    return [g,gg];
+}
+
+var g_and_gg = f22(1);
+g_and_gg[0]();
+g_and_gg[1]();
+document.write('</div>');
+document.write('<br>');
+
+document.write("&nbsp;関数gと関数ggはそれぞれローカル変数nを含む環境を保持します。関数gを宣言した時のnの値と関数ggを宣言した時のnの値は異なるので、クロージャgとクロージャggはそれぞれ異なるnの値を表示しそうです。しかし実際には同じ値を表示します。２つが同じCallオブジェクト(Call-fオブジェクト)を参照するからです。<br>");
+
+
+document.write("<h2>空間名の汚染を防ぐ</h2>");
+document.write("<ul class=\"midashi\"><li>モジュール</li></ul>");
+
+document.write("&nbsp;ここからいくつかクロージャを使う実践的な応用例を紹介します。<br>");
+document.write("&nbsp;JavaScriptのトップレベルコード（関数の外）に書いた名前（変数名と関数名）はグローバルのスコープを持ちます。いわゆるグローバル変数やグローバル関数です。CommonJSのようなモジュール機能を別途提供しないかぎり、JavaScriptの世界はコードを複数のソースファイルに分割してもお互いのグローバル名が見える世界です。JavaScriptの言語仕様にはいわゆるモジュールと呼ばれる言語機能がないからです。<br>");
+document.write("&nbsp;現状のクライアントサイドJavaScriptでは１つのHTMLファイルの中で複数のJavaScriptファイルを読み込むと、お互いのグローバルな名前が衝突します。つまり、あるファイルで使った名前は別ファイルで使えません、ひとりで開発していても不便ですが、他人の作ったライブラリなどを使うと相当不便です。<br>");
+document.write("&nbsp;また、グローバル変数はコードの保守性を落とします。とは言えグローバル変数だけに問題を押し付けるのはやや早計です。たとえば言語仕様上はグローバル変数を減らせばよいのではなく、不必要に広いスコープが悪だという認識を持つべきです。広いスコープの問題点は、コードのある部分を変更した時にその変更の影響範囲がわかりづらくなる点です。これがコードの保守性を悪くします。<br>");
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.write('<br>');
 document.write('<br>');
 document.write('<br>');
 
