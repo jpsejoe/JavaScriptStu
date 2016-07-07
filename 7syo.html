@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>学習用第6章</title>
+<link rel="stylesheet" href="./css/temp.css" type="text/css" />
+<script language="JavaScript"></script>
+</head>
+<body>
+
+<h1>配列</h1>
+<h2>JavaScriptの配列</h2>
+<div>
+&nbsp;&nbsp;JavaScriptの配列はリテラル表記とnew式の２つの方法で生成できます。new式での生成方式よりまず。配列リテラルの例を先に示します。
+
+<div class="box1">
+    <pre>
+    var arr = [3, 4, 5];
+    document.writeln(typeof arr);
+    </pre>
+</div>
+
+<div class="box2">
+<script type="text/javascript">
+    var arr = [3, 4, 5];
+    document.writeln(typeof arr);
+</script>
+</div>
+<div>
+    &nbsp;&nbsp;配列リテラルはブラケット([])の中に配列要素をカンマで区切って並べます。要素がない配列は長さゼロの配列です。長さゼロの配列を生成してあとから要素を足すのはJavaScriptでは一般的です。<br>
+</div>
+<div>
+&nbsp;&nbsp;要素には任意の値やオブジェクト参照を指定できます。配列の要素の型を整える必要はありません。変数にどんな方の値でも代入可能なことを知っていれば驚く事実ではありませんが、原則、要素の型を整える飛鳥があるJavaの配列とは異なる部分です。自由度が高いので便利ですが、意図しない型変換で不正な値が要素に紛れ込むバグの起きるので注意してください。
+</div>
+
+</div>
+</body>
+</html>

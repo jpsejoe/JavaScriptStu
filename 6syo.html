@@ -1033,11 +1033,367 @@ document.write("&nbsp;現状のクライアントサイドJavaScriptでは１つのHT
 document.write("&nbsp;また、グローバル変数はコードの保守性を落とします。とは言えグローバル変数だけに問題を押し付けるのはやや早計です。たとえば言語仕様上はグローバル変数を減らせばよいのではなく、不必要に広いスコープが悪だという認識を持つべきです。広いスコープの問題点は、コードのある部分を変更した時にその変更の影響範囲がわかりづらくなる点です。これがコードの保守性を悪くします。<br>");
 
 
+document.write("<ul class=\"midashi\"><li>グローバル変数の回避</li></ul>");
+document.write("&nbsp;形式的にJavaScriptでグローバル変数の数を減らす方法は簡単です。次のようにグローバル関数とグローバル変数があったとしますa。");
+
+document.write('<div class=\"box1\">');
+document.write("//グローバル変数<br>");
+document.write("function sum(a, b) {<br>");
+document.write("    return Number(a) + Number(b);<br>");
+document.write("}<br>");
+document.write("//グローバル変数<br>");
+document.write("var position = { x:2, y:3 };<br>");
+document.write('</div>');
+
+document.write("&nbsp;次のようにオブジェクトリテラルで生成したオブジェクトのプロパティにして名前をオブジェクトの中に閉じ込めると（形式的には）グローバル変数が減ります。");
+
+document.write('<div class=\"box1\">');
+document.write("var MyModule = {<br>");
+document.write("sum: function(a, b) {<br>");
+document.write("         return Number(a) + Number(b);<br>");
+document.write("     },<br>");
+document.write("position: { 2:x, y:3 }<br>");
+document.write("};<br>");
+document.write("MyModule.sum(3,3);<br>");
+document.write("document.write(MyModule.position.x);<br>");
+document.write('</div>');
+
+document.write('<div class=\"box2\">');
+var MyModule = {
+sum: function(a, b) {
+         return Number(a) + Number(b);
+     },
+position: { 2:x, y:3 }
+};
+MyModule.sum(3,3);
+document.write(MyModule.position.x);
+document.write('</div>');
+
+document.write("&nbsp;上記例はオブジェうとリテラルを使っていますが使わずに次のように書いても大丈夫です。");
+
+document.write('<div class=\"box1\">');
+document.write("var MyModule = {}; //new式で生成しなくても良い<br>");
+document.write("MyModule.cum = function(a, b) { return Number(a) = Number(b); };<br>");
+document.write("MyModule.position = {x:2, y:3 };<br>");
+document.write('</div>');
+
+document.write("&nbsp;この例のMyModuleに当たる名前を便宣畳モジュールと呼びます。この方針を低イテするとファイル１つあたりグローバル変数はモジュール名１つだけに減らせます。もちろんモジュール名の名前の衝突は残りますが、これは他のプログラミング言語にも残る問題です。<br>");
+document.write("&nbsp;オブジェクトの中に閉じ込める技法で名前の衝突のもンダは回避できます。しかしグローバルな名前のもう一つの問題、そもそもスコープが広い問題は解決できません。上記コードの場合、MyModule.prosition.xという少し長い名前を書いてしまえばコードのどこからでもこの変数にアクセスできるからです。<br>");
+
+document.write("<ul class=\"midashi\"><li>クロージャによる情報隠蔽</li></ul>");
+
+document.write("&nbsp;JavaScriptは言語としていわゆる情報隠蔽を助ける構文を持ちますが、クロージャを活用して外部から見えない名前を作成できます。<br>※やっていることに意味はありません");
+
+document.write('<div class=\"box1\">');
+document.write("// 関数リテラル（無名）をその場で呼び出す。<br>");
+document.write("// 関数リテラルの返り値は関数なので関数sumは関数<br>");
+document.write("var sum = (function() {<br>");
+document.write("        //関数外部からこの名前にアクセス出来ない<br>");
+document.write("        //事実上、プライベートな変数<br>");
+document.write("        //通常、関数の呼び出しが終わればアクセスでき位名前だが<br>");
+document.write("        //返り値の無名関数の中から使える<br>");
+document.write("        var position = { x:2, y:3 };<br>");
+document.write("        //同じく関数外部からアクセス出来ないプライベート関数<br>");
+document.write("        //名前をsumにしても問題ないが、余計な混乱を避けるため個々では別名にしている<br>");
+document.write("        function sum_internal(a, b) {<br>");
+document.write("        return Number(a) + Number(b);<br>");
+document.write("        }<br>");
+document.write("        //上記２つの名前を強引に使うだけの恣意的な返り値<br>");
+document.write("        return function(a, b) {<br>");
+document.write("        document.write('x = ', position.x);<br>");
+document.write("        return sum_internal(a, b) };<br>");
+document.write("        }<br>");
+document.write("        )();<br>");
+document.write("document.write(sum(3, 4));<br>");
+
+document.write('</div>');
 
 
+document.write('<div class=\"box2\">');
+// 関数リテラル（無名）をその場で呼び出す。
+// 関数リテラルの返り値は関数なので関数sumは関数
+var sum = (function() {
+        //関数外部からこの名前にアクセス出来ない
+        //事実上、プライベートな変数
+        //通常、関数の呼び出しが終わればアクセスでき位名前だが
+        //返り値の無名関数の中から使える
+        var position = { x:2, y:3 };
+
+        //同じく関数外部からアクセス出来ないプライベート関数
+        //名前をsumにしても問題ないが、余計な混乱を避けるため個々では別名にしている
+        function sum_internal(a, b) {
+        return Number(a) + Number(b);
+        }
+
+        //上記２つの名前を強引に使うだけの恣意的な返り値
+        return function(a, b) {
+        document.write('x = ', position.x);
+        document.write('<br>');
+        return sum_internal(a, b) };
+        }
+        )();
+document.write(sum(3, 4));
+document.write('</div>');
+
+document.write("&nbsp;上を抽象化すると次の形式のコードです。関数スコープによる名前の閉じ込めと、クロージャで関数を抜けたあとも生きている名前、という２つの特性を活用した情報隠蔽です。<br>");
+
+document.write("<div class=\"block\">");
+document.write("(function() { 関数本体 } )();");
+document.write('</div>');
+
+document.write("&nbsp;上記のように、関数リテラルをその場で呼び出すコードは、関数はどこかで宣言して必要に応じで呼び出すと思い込んでいると奇妙に見えます。しかしJavaScriptのイディオムなので覚えておいてください。<br>");
+document.write("&nbsp;上記の関数リテラルの返り値は関数ですが、何を返しても同じ技法は使えます。たとえば次のようにオブジェクトリテラルを返しても情報隠蔽の目的は達成できます。<br>");
+
+document.write('<div class=\"box1\">');
+document.write("var obj = ( function() {<br>");
+document.write("    //関数の外部からこの名前にアクセス出来ない<br>");
+document.write("    //事実上、プライベートな変数<br>");
+document.write("    var position = { x:2, y:3 };<br>");
+document.write("    //同じく関数の外部からアクセスできないプライベート関数<br>");
+document.write("    function sum_internal(a, b) {<br>");
+document.write("        return Number(a) + Number(b);<br>");
+document.write("    }<br>");
+document.write("    //上記２つの名前を強引に使うだけの恣意的な返り値<br>");
+document.write("    return {<br>");
+document.write("        sum:function(a, b) { return sum_internal(a, b) },<br>");
+document.write("        x:position.x<br>");
+document.write("    };<br>");
+document.write("    } <br>");
+document.write(")();<br>");
+document.write("document.write(obj.sum(3, 4));<br>");
+document.write("document.write(obj.x);<br>");
+document.write('</div>');
+
+document.write('<div class=\"box2\">');
+var obj = ( function() {
+    //関数の外部からこの名前にアクセス出来ない
+    //事実上、プライベートな変数
+    var position = { x:2, y:3 };
+
+    //同じく関数の外部からアクセスできないプライベート関数
+    function sum_internal(a, b) {
+        return Number(a) + Number(b);
+    }
+
+    //上記２つの名前を強引に使うだけの恣意的な返り値
+    return {
+        sum:function(a, b) { return sum_internal(a, b) },
+        x:position.x
+    };
+    } 
+)();
+document.write(obj.sum(3, 4));
+document.write('<br>');
+document.write(obj.x);
+document.write('</div>');
 
 
+document.write("<h2>クロージャとクラス</h2>");
 
+document.write("&nbsp;コンストラクタ版のくらすでは次の課題があります。<br>");
+
+        document.write("<ul class=\"ten\"><li>プロパティ値のアクセス制限(privateやpuiblicなど)ができない</li></ul>");
+
+document.write("&nbsp;JavaScript自体にはアクセス制限の構文がありません。ただ関数スコープとクロージャを活用すればアクセス制限を制限できます。今回消化得する技法を使うと、状態を変更できない不変オブジェクトも生成可能です。<br>");
+document.write("&nbsp;基本的な考え方は、前節のモジュールそのものです。前節のモジュールは関数を宣言してその場で呼び出しますが、クロージャを使うクラスはインスタンス生成のたびに呼び出せるようにします。と言っても形式上は単なる関数宣言です。<br>");
+
+document.write('<div class=\"box1\">');
+document.write("function myclass(x, y) {<br>");
+document.write("    return { show:function() { document.write(x,y) } };<br>");
+document.write("}<br>");
+document.write("var obj = myclass(3, 2);<br>");
+document.write("obj.show();<br>");
+document.write('</div>');
+
+document.write('<div class=\"box2\">');
+function myclass(x, y) {
+    return { show:function() { document.write(x,y) } };
+}
+var obj = myclass(3, 2);
+obj.show();
+document.write('</div>');
+
+document.write("&nbsp;別の具体例としてカウンタを表現するクラスを挙げます。コメントを見てクロージャを使うクラスの形をつかんでください。<br>");
+
+document.write('<div class=\"box1\">');
+document.write("function counter_class(init) { //初期値をパラメータで受け取る<br>");
+document.write("    var cnt = init || 0; //デフォルトパラメータのイディオム<br>");
+document.write("    //必要であればここにプライベートな変数や関数を宣言<br>");
+document.write("    return {<br>");
+document.write("        //公開メソッド<br>");
+document.write("show:function() { document.write(cnt + '<br>'); },<br>");
+document.write("         up:function() {cnt++; return this;}, //return thisはメソッドチェーンに便利<br>");
+document.write("         down:function() { cnt--; return this;}<br>");
+document.write("    };<br>");
+document.write("}<br>");
+document.write("var counter1 = counter_class();<br>");
+document.write("counter1.show();<br>");
+document.write("counter1.up();<br>");
+document.write("counter1.show();<br>");
+document.write("counter1.down();<br>");
+document.write("counter1.show();<br>");
+document.write("var counter2 = counter_class(10);<br>");
+document.write("counter2.up().up().up().show() //メソッドチェーン<br>");
+document.write('</div>');
+
+
+document.write('<div class=\"box2\">');
+function counter_class(init) { //初期値をパラメータで受け取る
+    var cnt = init || 0; //デフォルトパラメータのイディオム
+
+    //必要であればここにプライベートな変数や関数を宣言
+
+    return {
+        //公開メソッド
+show:function() { document.write(cnt + '<br>'); },
+         up:function() {cnt++; return this;}, //return thisはメソッドチェーンに便利
+         down:function() { cnt--; return this;}
+    };
+}
+
+var counter1 = counter_class();
+counter1.show();
+counter1.up();
+counter1.show();
+counter1.down();
+counter1.show();
+
+var counter2 = counter_class(10);
+counter2.up().up().up().show() //メソッドチェーン
+
+document.write('</div>');
+
+
+document.write("<h3>式クロージャ</h3>");
+document.write("&nbsp;関数系のプログラミングをサポートする式クロージャ(Expression closures)と呼ばれるJavaScript独自拡張があります。<br>");
+document.write("&nbsp;式クロージャは関数宣言式の省略構文です。次のように中身がreturnのみの関数宣言式のreturnと{}の記述を省略できます。<br>");
+document.write("<div class=\"block\">");
+document.write("document.write(<br>");
+document.write("        var sum function(a,b) { return Number(a) + Number(b); }<br>");
+document.write("を<br>");
+document.write("var sum = function(a, b) Number(a) + Number(b);<br>");
+document.write("と省略可能<br>");
+document.write("</div>");
+
+document.write("<h2>コールバックパターン</h2>");
+document.write("<h3>コールバックと制御の反転</h3>");
+
+document.write("&nbsp;コールバックと呼ばれるプログラミング技法があります。呼んでほしい関数やオブ塾とを渡しておき、必要に応じてそれらを呼んでもらう技法です。呼ぶ側と呼ばれる側の依存性が反転することから制御の反転(IoC:Inversion of Control)と呼ぶ人もいます<br>");
+document.write("&nbsp;歴史的にJavaScriptプログラミングではコールバックの技法を多少します。これにはいくつかの理由があります。１つ目の理由はクライアントサイドJavaScriptが基本的にGUIプログラミングだという背景です。<br>");
+document.write("&nbsp;GUIプログラミングでは、イベントドリブンと呼ばれるプログラミングスタイルと相性が良いことが知られています。イベントドリブンはまさにコールバックパターンです。クライアントサイドJavaScriptのプログラミングはDOMのイベントをベースにしたイベントドリブンプログラミングになります。<br>");
+document.write("&nbsp;２つ目の理由はクライアントサイドJavaScriptでマルチスレッドプログラミングが出来ないことに起因しています。コールバックは非同期処理と組み合わせることで並列処理を実現できます。並列処理の実現位マルチスレッドを利用できないため必然的にコールバックを使う技法が定着しています。最後の１つはJavaScriptに関数宣言式とクロージャがある点です。<br>");
+document.write("&nbsp;JavaScriptプログラミングは歴史的にコールバックを多用しますが、コールバックはJavaScript固有の話ではありません。コールバックに類似のパターンはある規模以上のプログラミングでは普遍的に現れるものだと思っています。フレームワークプログラミング、イベントドリブン、プラグインのようなアーキテクチャのレベルから、オブザーバパターン、テンプレートメソッドパターンのようなデザインパターンで知られるコーディング技法のレベルまで、どれも不変な部分や抽出コードをコアに持ち、変わる部分や具象コードを外部に追い出し拡張する点で類似の構造を持っています。<br>");
+
+document.write("<h2>JavaScriptとコールバック</h2>");
+document.write("&nbsp;現実のプログラミングでは普通の開発者は呼ばれる側の身を実装します。しかし裏側の動作原理を知っておくことは役に立つはずです。<br>");
+
+document.write("<ul class=\"midashi\"><li>コールバック関数</li></ul>");
+
+document.write("&nbsp;以下はコールバックをエミュレートする簡単なコードです。事前にemitterオブジェクトにコールバック関数を登録(register)しておきます。onOpenイベントからコールバック関数が呼ばれます。emitterから見ると登録された関数を呼びだけですが、コールバックの文脈ではemitterを使う側の支店で見てください。使う側から見ると登録したコールバック関数が呼ばれる関係になります。<br>");
+
+document.write("<div class=\"block\">");
+document.write("var emitter = {<br>");
+document.write("    //複数のコールバック関数を登録できるように配列で管理<br>");
+document.write("    callbacks:[],<br>");
+document.write("    register:function(fn){<br>");
+document.write("         this.callbacks.push(fn);<br>");
+document.write("     },<br>");
+document.write("    //イベント発火処理<br>");
+document.write("onOpen:function() {<br>");
+document.write("           for each (var f in this.callbacks) {<br>");
+document.write("            f();<br>");
+document.write("           }<br>");
+document.write("       }<br>");
+document.write("};<br>");
+document.write("//コールバック関数の登録<br>");
+document.write("emitter.register( function() { document.write('event handle1 is called<br>'); });<br>");
+document.write("emitter.register( function() { document.write('event handle2 is called<br>'); });<br>");
+document.write("//イベント派生のエミュレーション（コールバック関数の呼び出し）<br>");
+document.write("emitter.onOpen();<br>");
+document.write("</div>");
+
+document.write("<ul class=\"midashi\"><li>コールバックとメソッド</li></ul>");
+document.write("&nbsp;コールバック関数はただの関数なので状態を持てません。コールバック関数が状態を持てると利用の幅が広がります。コールバックされる側をオブジェクトにして、emitterにメソッドを渡す形に変えたのが以下のソースです。コメントにもありますが、これは期待通りの動作をしません。<br>");
+
+document.write("</div>");
+
+
+document.write("<div class=\"block\">");
+document.write("function MyClass1(msg) {<br>");
+document.write("    this.msg = msg;<br>");
+document.write("    this.show = function() { document.write(this.msg + ' is called<br>'); }<br>");
+document.write("}<br>");
+document.write("var obj1 = new MyClass1('listener1');<br>");
+document.write("var obj2 = new MyClass2('listener2');<br>");
+document.write("emitter.register(obj1.show);<br>");
+document.write("emitter.register(obj2.show);<br>");
+document.write("emitter.onOpen();<br>");
+document.write("undefined is called<br>");
+document.write("undefined is called<br>");
+document.write("</div>");
+
+document.write("&nbsp;コールバック関数の呼び出しでthis.msgを正しく表示できていません。JavaScriptメソッド内のthis参照が正しくないためです。解決には２つの方法があります。１つはbindを使う方法で、もう一つがメソッドではなくオブジェウトを登録する方法です。後者はJavaScriptで一般的ではない。<br>");
+
+document.write("<div class=\"block\">");
+document.write("//メソッドをコールバック関数に登録<br>");
+document.write("var obj1 = new MyClass1('lister1');<br>");
+document.write("var obj2 = new MyClass1('lister2');<br>");
+document.write("emitter.register(obj1.show.bind(obj1));<br>");
+document.write("emitter.register(obj2.show.bind(obj2));<br>");
+document.write("//イベント発生のエミュレーション(コールバック関数の呼び出し)<br>");
+document.write("emitter.onOpen();<br>");
+document.write("listener1 is called<br>");
+document.write("listener2 is called<br>");
+
+document.write("</div>");
+
+document.write("&nbsp;bindはECMAScript第5版で追加された状態です。Function.porototypeオブジェクトのメソッドです。bindの働きはapplyとcallと同じで、呼び出したメソッドでのthis参照を明示するために使います。関数に対してbindを呼ぶと新しい関数を返します。<br>");
+
+document.write("&nbsp;新しい関数は元関数と同じ内容を実行しますが。this参照がbindの第一引数に指定したオブジェクトになります。applyとcallを使えば独自に実装可能です。実際、ECMAScript第5版が出る以前から、prototype.jsなど著名なライブラリはbindの独自実装をapply/callで提供していました。興味があればそれらの実装も参照してください。<br>");
+
+document.write("<ul class=\"midashi\"><li>コールバックとメソッド</li></ul>");
+
+document.write("&nbsp;最後にクロージャを使うコールバックを紹介します。今までの苦労がウソのようにあっさり書けます。かつ、オブジェクトのように状態を持てます。<br>");
+document.write("<div class=\"block\">");
+document.write("//クロージャをコールバック関数に登録<br>");
+document.write("emitter.register(( function() { var msg = 'closure1'; return function() { document.write(msg + 'is called'); } })());;<br>");
+document.write("emitter.register(( function() { var msg = 'closure2'; return function() { document.write(msg + 'is called'); } })());;<br>");
+document.write("//イベントは生のエミュレーション（コールバック関数の呼び出し)<br>");
+document.write("emitter.onOpen();<br>");
+document.write("closure1 is called<br>");
+document.write("closure2 is called<br>");
+document.write("</div>");
+
+document.write("<h3>イベントリスナ風の実装</h3>");
+document.write("&nbsp;参考までにJavaなどで一般的に見られるイベントリスナ風の実装例を紹介します。イベントリスナ側で決まった名前のメソッド（以下ではMyClass内のonOpenメソッドの実装が必要です。このような事前の取り決めを面倒と思うか、オブジェクトの役割が明確になって好ましいと思うかは人によります。歴史的にJavaScriptはこのスタイルのコールバックをあまり使いません（クロージャのほうが普通)<br>");
+
+
+document.write("<div class=\"block\">");
+document.write("var emitter = {<br>");
+document.write("    callbacks:[],<br>");
+document.write("    register:function(obj) {<br>");
+document.write("        this.callbacks.push(obj);<br>");
+document.write("     },<br>");
+document.write("    onOpen:function() {<br>");
+document.write("        for each (var obj in this.callbacks) {<br>");
+document.write("            if('onOpen' is obj) {<br>");
+document.write("                obj.onOpen();<br>");
+document.write("            }<br>");
+document.write("        }<br>");
+document.write("    }<br>");
+document.write("};<br>");
+document.write("function MyClass3(msg) {<br>");
+document.write("    this.msg = msg;<br>");
+document.write("    this.onOpen = function() {document.write(this.msg + 'is called'); }<br>");
+document.write("}<br>");
+document.write("var obj1 = new MyClass3('lister1');<br>");
+document.write("var obj2 = new MyClass3('lister2');<br>");
+document.write("emitter.register(obj1);<br>");
+document.write("emitter.register(obj2);<br>");
+document.write("emitter.onOpen();<br>");
+document.write("listener1 is called<br>");
+document.write("listener2 is called<br>");
+document.write("</div>");
 
 
 
