@@ -1,36 +1,382 @@
 <html>
-<head>
-<title>学習用第6章</title>
-<link rel="stylesheet" href="./css/temp.css" type="text/css" />
-<script language="JavaScript"></script>
-</head>
-<body>
+    <head>
+        <title>学習用第7章</title>
+        <link rel="stylesheet" href="./css/temp.css" type="text/css" />
+        <script language="JavaScript"></script>
+        <script>
+            var print = 'document.writeln';
+        </script>
+    </head>
+    <body>
 
-<h1>配列</h1>
-<h2>JavaScriptの配列</h2>
-<div>
-&nbsp;&nbsp;JavaScriptの配列はリテラル表記とnew式の２つの方法で生成できます。new式での生成方式よりまず。配列リテラルの例を先に示します。
+        <h1>配列</h1>
+        <h2>JavaScriptの配列</h2>
+        <div>
+            &nbsp;&nbsp;JavaScriptの配列はリテラル表記とnew式の２つの方法で生成できます。new式での生成方式よりまず。配列リテラルの例を先に示します。
+        </div>
 
-<div class="box1">
-    <pre>
+        <div class="box1">
+            <pre>
     var arr = [3, 4, 5];
     document.writeln(typeof arr);
     </pre>
-</div>
+        </div>
 
-<div class="box2">
-<script type="text/javascript">
-    var arr = [3, 4, 5];
-    document.writeln(typeof arr);
-</script>
-</div>
-<div>
-    &nbsp;&nbsp;配列リテラルはブラケット([])の中に配列要素をカンマで区切って並べます。要素がない配列は長さゼロの配列です。長さゼロの配列を生成してあとから要素を足すのはJavaScriptでは一般的です。<br>
-</div>
-<div>
-&nbsp;&nbsp;要素には任意の値やオブジェクト参照を指定できます。配列の要素の型を整える必要はありません。変数にどんな方の値でも代入可能なことを知っていれば驚く事実ではありませんが、原則、要素の型を整える飛鳥があるJavaの配列とは異なる部分です。自由度が高いので便利ですが、意図しない型変換で不正な値が要素に紛れ込むバグの起きるので注意してください。
-</div>
+        <div class="box2">
+            <script type="text/javascript">
+                var arr = [3, 4, 5];
+                document.writeln(typeof arr);
+                </script>
+            </div>
+            <div>
+                &nbsp;&nbsp;配列リテラルはブラケット([])の中に配列要素をカンマで区切って並べます。要素がない配列は長さゼロの配列です。長さゼロの配列を生成してあとから要素を足すのはJavaScriptでは一般的です。<br>
+            </div>
+            <div>
+                &nbsp;&nbsp;要素には任意の値やオブジェクト参照を指定できます。配列の要素の型を整える必要はありません。変数にどんな方の値でも代入可能なことを知っていれば驚く事実ではありませんが、原則、要素の型を整える飛鳥があるJavaの配列とは異なる部分です。自由度が高いので便利ですが、意図しない型変換で不正な値が要素に紛れ込むバグの起きるので注意してください。
+            </div>
 
-</div>
-</body>
-</html>
+            <div class="box1">
+                <pre>
+    var s ='bar';
+    var arr = [1, 'foo', s, true, null, undefined, {x:3, y:4}, [2, 'bar'], function(a, b) {return Number(a) + Number(b); }];
+    document.writeln(arr);
+    </pre>
+            </div>
+            <div class="box2">
+                <script type="text/javascript">
+                    var s ='bar';
+                    var arr = [1, 'foo', s, true, null, undefined, {x:3, y:4}, [2, 'bar'], function(a, b) {return Number(a) + Number(b); }];
+                    document.writeln(arr);
+                    </script>
+                </div>
+                <div>
+
+                    <div>
+                        &nbsp;&nbsp;要素の途中をスキップした配列リテラルも可能です。飛ばした要素の値はundefined値となります。
+                    </div>
+
+                    <div class="box1">
+<pre>
+    var arr = [3,,5];
+    document.writeln(arr[0],arr[1],arr[2]);
+</pre>
+                    </div>
+
+                    <div class="box2">
+                        <script>
+                            var arr = [3,,5];
+                            document.writeln(arr[0],arr[1],arr[2]);
+                        </script>
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;次のようにカンマで終わる配列リテラルを書くと、ECMAScriptは最後のカンマを無視するようになっています。しかし、古いIEで問題の起きることが知られています。このため配列の最後のカンマは避けたほうが安全です。
+                    </div>
+
+
+                    <div class="box1">
+<pre>
+        var arr = [3,4,];
+        document.writeln(arr.length);
+</pre>
+                    </div>
+
+                    <div class="box2">
+                        <script>
+                            var arr = [3,4,];
+                            document.writeln(arr.length);
+                        </script>
+                    </div>
+
+                    <h2>配列の要素アクセス</h2>
+                    <div>
+                        &nbsp;&nbsp;配列の要素のアクセスはブラケット演算子（[]演算子）で行います。[]内には添字の数値を書きます。添字は0から始まります。要素のない添字を指定するとundefined値になります。
+                    </div>
+
+                    <div class="box1">
+<pre>
+    var arr = [3,4,5];
+    document.writeln(arr[0],arr[1],arr[2]);
+</pre>
+                    </div>
+
+                    <div class="box2">
+                        <script>
+                            var arr = [3,4,5];
+                            document.writeln(arr[0],arr[1],arr[2]);
+                        </script>
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;添字には結果が数値にある任意の式を書けます。内部的には添字に書いた式を文字列として評価してから数値のように扱います。このため次のように通知に解釈できる文字列を添字に書いても動作します。しかし、この動作への依存はコードの可用性の観点から推奨しません。
+                    </div>
+
+                    <div class="box1">
+                        <pre>
+        document.writeln(arr[2]);
+
+        document.writeln(arr[s + 1]);
+
+        var one = { toString:function() { return '1'; }} //文字列型に型変換すると'1'になるオブジェクト
+        document.writeln(arr[one]);
+    </pre>
+                    </div>
+
+                    <div class="box2">
+                        <script>
+                            var s = '2';
+                            document.writeln(arr[2]);
+                            document.writeln("<br>");
+                            document.writeln(arr[s + 1]);
+                            document.writeln("<br>");
+
+                            var one = { toString:function() { return '1'; }} //文字列型に型変換すると'1'になるオブジェクト
+                            document.writeln(arr[one]);
+                        </script>
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;ブラケット演算子を代入式の左辺にかくと要素を書き換えられます。
+                    </div>
+
+                    <div class="box1">
+                        <pre>
+        arr[2] = arr[2] * 2;
+        document.writeln(arr[2]);
+
+        document.writeln(arr);
+    </pre>
+                    </div>
+
+                    <div class="box2">
+                        <script>
+                            arr[2] = arr[2] * 2;
+                            document.writeln(arr[2]);
+                            document.writeln("<br>");
+
+                            document.writeln(arr);
+                        </script>
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;代入式の左辺に要素数を超える添字を書くと、新しい要素の追加になります。途中の数字を飛ばした要素の追加もできます。この場合、途中の飛ばした要素にアクセスするとundefined値が帰ります。
+                    </div>
+
+                    <div class="box1">
+                        <pre>
+        arr[3] =20;
+        document.writeln(arr);
+
+        arr[10] = 100;
+        document.writeln(arr);
+
+        document.writeln(arr.length);
+        document.writeln(arr[4]);
+    </pre>
+                    </div>
+
+                    <div class="box2">
+                        <script>
+                            arr[3] =20;
+                            document.writeln(arr);
+                            document.writeln("<br>");
+
+                            arr[10] = 100;
+                            document.writeln(arr);
+                            document.writeln("<br>");
+
+                            document.writeln(arr.length);
+                            document.writeln("<br>");
+                            document.writeln(arr[4]);
+                        </script>
+                    </div>
+
+                    <h2>配列の長さ</h2>
+                    <div>
+                        &nbsp;&nbsp;配列とドット演算子に続いてlengthを書くと配列の長さを得られます。配列の長さは配列の最後尾の要素のインデックスに1を足した数値です。少しわかりづらい表現をした理由は隙間のある配列を作った時、要素数と配列長は異なるからです。次の具体例を見てください。
+                    </div>
+
+                    <div class="box1">
+<pre>
+        var arr = [2,,,,3];
+        document.writeln(arr.length);
+</pre>
+                    </div>
+                    <div class="box2">
+                        <script>
+                            var arr = [2,,,,3];
+                            document.writeln(arr.length);
+                        </script>
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;最後尾に要素を加えるとlength値は自動で増分されます。途中の要素を飛ばして追加しても最後の要素のインデックスに1を足した数になります。
+                    </div>
+
+                    <div class="box1">
+                        <pre>
+        var arr = ['zero', 'one', 'two'];
+        arr[arr.length] = 'three';
+        document.writeln(arr);
+        document.writeln(arr.length);
+        arr[100] = 'x';
+        document.writeln(arr.length);
+    </pre>
+                    </div>
+
+                    <div class="box2">
+                        <script>
+                            var arr = ['zero', 'one', 'two'];
+                            arr[arr.length] = 'three';
+                            document.writeln(arr);
+                            document.writeln("<br>");
+                            document.writeln(arr.length);
+                            document.writeln("<br>");
+                            arr[100] = 'x';
+                            document.writeln(arr.length);
+                        </script>
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;内部的にはlengthプロパティなので次のようにブラケット演算子でもアクセス可能です。しかし記述が増えるだけで利点もないのであまり使いません。
+                    </div>
+                    <div class="block">
+                        document.writeln(arr['length']);
+                    </div>
+
+                    <h2>解列の要素の列挙</h2>
+
+                    <div>
+                        &nbsp;&nbsp;配列の要素を列挙するにはfor文が一番良く使われます。次に例を示します。
+                    </div>
+
+
+                    <div class="box1">
+<pre>
+        //配列arrの全要素を列挙するイディオム
+        for ( var i = 0, len = arr.length; i < len; i++) {
+            document.writeln('Nmb is ' + i + ' as ' + arr[i]);
+        }
+</pre>
+                    </div>
+
+                    <div class="box2">
+                        <script>
+                            //配列arrの全要素を列挙するイディオム
+                            for ( var i = 0, len = arr.length; i < len; i++) {
+                                document.writeln('Nmb is ' + i + ' as ' + arr[i]);
+                            }
+                        </script>
+                    </div>
+                    <div>
+                        &nbsp;&nbsp;for in文やfor each in文でも諸祖を列挙できますが順序の保証がありません。列挙の順序を保証したい場合はfor文を使っててください。<br>
+                        &nbsp;&nbsp;for文のような繰り返し文(ループ文）以外の方法として、配列書く要素を順に呼び出すメソッドによる列挙の方法があります。ループ文が裏に現れるためインナーループと呼ぶ人もいます。
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;ECMAScript第５版にはこのようなインナーループ系のメソッドがいくつかあります。その中でももっとも代表的なForEachメソッドを紹介します。forEachメソッドの引数には各要素ごとに呼ばれる関数(コールバック関数)を指定します。<br>&nbsp;&nbsp;配列の全要素を列挙するコードは次のように書けます。
+                    </div>
+
+                    <div class="block">
+                        arr.forEach(function(e)) {document.write(e); } )
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;コールバック関数には３つの引数が渡ってきます。要素、インデックス値、配列オブジェクトです。具体例を下記にする示します。
+                    </div>
+
+                    <div class="box1">
+<pre>
+        var arr = ['zero', 'one', 'two'];
+        //コールバック関数の引数
+        //引数e: 要素値
+        //引数i: インデックス値
+        //引数a: 配列オブジェクト
+        arr.forEach(function(e,i,a) { document.writeln(i,e) } );
+
+</pre>
+                    </div>
+                    <div class="box2">
+                        <script>
+                            var arr = ['zero', 'one', 'two'];
+                            //コールバック関数の引数
+                            //引数e: 要素値
+                            //引数i: インデックス値
+                            //引数a: 配列オブジェクト
+                            arr.forEach(function(e,i,a) { document.writeln(i,e) } );
+                        </script>
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;forEachの第２引数にはコールバック関数内でのthis参照が参照するオブジェクトも指定できます。具体例は省略します。
+                    </div>
+
+                    <h2>多次元配列</h2>
+                    <div>
+                        &nbsp;&nbsp;配列の要素には何でも指定できるので配列の指定もできます。そして要素に配列を指定した場合、次のように[]演算子を連続して要素にアクセスできます。これで多次元配列を実現できます。
+                    </div>
+
+                    <div class="box1">
+                        <pre>
+        var arr_of_arr = [ 1, ['zero', 'one', 'two', 'three ']];
+        document.writeln(arr_of_arr[1][1]);
+    </pre>
+                    </div>
+
+                    <div class="box2">
+                        <script>
+                            var arr_of_arr = [ 1, ['zero', 'one', 'two', 'three ']];
+                            document.writeln(arr_of_arr[1][1]);
+                        </script>
+                    </div>
+
+                    <h2>配列はオブジェクト</h2>
+                    <div>
+                        &nbsp;&nbsp;JavaScriptの配列はオブジェクトです。内部的にはArrayオブジェクト(Arrayクラス)のインスタンスオブジェクトです。このためnew式でArrayコンストラクタを呼び出す配列生成も可能です。
+                    </div>
+                    <div>
+                        &nbsp;&nbsp;Arrayコンストラクタに渡す引数はその数によって異なる解釈をされます。引数の数が１つでかつそれが数値の場合は配列の長さ(要素数)を意味し、引数の数が２つ以上の場合は個々の引数が配列の要素になります。
+                    </div>
+
+                    <div class="box1">
+                        <pre>
+        var arr = new Array(5);
+        document.writeln(arr);
+        var arr = new Array(3, 4, 'foo'); //引数が配列の要素となる
+        document.writeln(arr);
+        var arr = new Array('5');
+        document.writeln(arr);
+    </pre>
+                    </div>
+
+                    <div class="box2">
+                        <script>
+                            var arr = new Array(5);
+                            document.writeln(arr);
+                            document.writeln('<br>');
+                            var arr = new Array(3, 4, 'foo'); //引数が配列の要素となる
+                            document.writeln(arr);
+                            document.writeln('<br>');
+                            var arr = new Array('5');
+                            document.writeln(arr);
+                        </script>
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;new式での配列生背を紹介しましたが、特に理由がなければ配列生成にはリテラル式を使ってください。リテラルのほうが表記が簡単だからです。配列リテラルで生成した配列もArrayインスタンスオブジェクトです。これは次のように確認できます。
+                    </div>
+
+
+                    <script>
+                        print("test:);
+                    </script>
+
+
+
+
+                    <div>
+                        &nbsp;&nbsp;
+                    </div>
+
+                </body>
+            </html>
