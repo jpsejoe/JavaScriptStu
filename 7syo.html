@@ -363,15 +363,116 @@
                     </div>
 
                     <div>
-                        &nbsp;&nbsp;new式での配列生背を紹介しましたが、特に理由がなければ配列生成にはリテラル式を使ってください。リテラルのほうが表記が簡単だからです。配列リテラルで生成した配列もArrayインスタンスオブジェクトです。これは次のように確認できます。
+                        &nbsp;&nbsp;new式での生成はコンストラクタの引数ん数で意味が変わるのがバグのもとです。 思わぬバグを避けるためなるべく使わないことを勧めます。<br>
+                        しかし、new式で書いたほうが良い場合が限定的に存在します。生成時に配列の長さを指定する場合です。<br>
+                        &nbsp;&nbsp;たとえば、要素数が100で個々の要素が未定の配列をリテラルで書けなくはありませんが([]の中に,を100個書きます)煩雑すぎるのでこのような場合はnew式が良いでしょう。<br>
+                        ちなみに要素を追加すると配列の長さは自動で伸びるので、作成時に配列長の指定は必須ではありません。<br>
+                        指定するのは効率が良くなることの期待と、配列の糸を明確にするコード可読性向上が主な理由です。<br>
+                    &nbsp;&nbsp;配列オブジェクトのMethod呼び出し例は次のようになります。
+                    </div>
+
+                    <div class="box1">
+                        <pre>
+                            var arr = ['zero', 'one', 'two'];
+                            var SampleText = arr.join('_');  //joinMethodの呼び出し
+                            document.writeln(SampleText);
+
+                            document.writeln([3, 4, 5].join('_'));  //配列リテラル直結Method呼び出しも可能
+                        </pre>
                     </div>
 
 
-                    <script>
-                        print("test:);
-                    </script>
+                    <div class="box2">
+                        <script>
+                            var arr = ['zero', 'one', 'two'];
+                            var SampleText = arr.join('_');
+                            document.writeln(SampleText);
+
+                            document.writeln('<br>');
+                            document.writeln([3, 4, 5].join('_'));
+                        </script>
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;配列の要素アクセスに使うプラケット演算子の実態は、オブジェクトのプロパティアクセスそのものです。つまり内部的にはインデックス値の0や1の数値が配列オブジェクトのプロパティ名になっています<br>
+                        &nbsp;&nbsp;lengthもプロパティ名の１つです。ただしfor分では列挙されません。<br>
+                        &nbsp;&nbsp;lengthプロパティのenumerable属性が偽だからです。
+                    </div>
 
 
+                    <div class="box1">
+                        <pre>
+                            var arr = ['zero', 'one', 'two'];
+
+                            //インデックス値の列挙　＝　プロパティ名の列挙
+                            for(var n in arr) { document.writeln(n); }
+
+                            //プロパティ名の列挙
+                            document.writeln(Object.keys(arr));
+
+                            //プロパティ名の列挙(enumerble属性を無視)
+                            var SampleText = Object.getOwnPropertyNames(arr);
+                            document.writeln(SampleText);
+
+                            //index0の存在チェック
+                            var SampleText = '0' in arr;
+                            document.writeln(SampleText);
+
+                            //数値0は文字列'0'に型変換されてチェック
+                            var SampleText = 0 in arr;
+                            document.writeln(SampleText);
+
+                            //index3の存在チェック
+                            var SampleText = 3 in arr;
+                            document.writeln(SampleText);
+
+                            //lengthプロパティの存在チェック
+                            var SampleText = length in arr;
+                            document.writeln(SampleText);
+                        </pre>
+                    </div>
+
+                    <div class="box2">
+                        <script>
+                            var arr = ['zero', 'one', 'two'];
+
+                            //インデックス値の列挙　＝　プロパティ名の列挙
+                            for(var n in arr) { document.writeln(n + '<br>'); }
+                            document.writeln('<br>');
+
+                            //プロパティ名の列挙
+                            document.writeln(Object.keys(arr) + '<br>');
+                            document.writeln('<br>');
+
+                            //プロパティ名の列挙(enumerble属性を無視)
+                            var SampleText = Object.getOwnPropertyNames(arr);
+                            document.writeln(SampleText + '<br>');
+                            document.writeln('<br>');
+
+                            //index0の存在チェック
+                            var SampleText = '0' in arr;
+                            document.writeln(SampleText + '<br>');
+                            document.writeln('<br>');
+
+                            //数値0は文字列'0'に型変換されてチェック
+                            var SampleText = 0 in arr;
+                            document.writeln(SampleText + '<br>');
+                            document.writeln('<br>');
+
+                            //index3の存在チェック
+                            var SampleText = 3 in arr;
+                            document.writeln(SampleText + '<br>');
+                            document.writeln('<br>');
+
+                            //lengthプロパティの存在チェック
+                            var SampleText = length in arr;
+                            document.writeln(SampleText + '<br>');
+                            document.writeln('<br>');
+
+
+
+                        </script>
+                    </div>
 
 
                     <div>
